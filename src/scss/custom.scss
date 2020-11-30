@@ -1,0 +1,13 @@
+// Bootstrap variable overrides
+$body-bg: #020202;
+$body-color: #e7e7e7;
+
+// Variables
+$primary-light: rgba($body-color, 0.60);
+$yellow: #E4BD00;
+$darkgray: #1c1c1c;
+$lghtgray: #333333;
+$font-stack: 'Roboto', 'Helvetica', sans-serif;
+
+// Bootstrap and its default variables
+@import "node_modules/bootstrap/scss/bootstrap";
