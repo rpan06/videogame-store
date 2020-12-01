@@ -16,7 +16,7 @@ export default class LandingPage extends React.Component {
 
   render() {
     return (
-      <div className='container'>
+      <div className="container">
         <Carousel />
         <GameList />
         <Ads />
