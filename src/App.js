@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 // import LandingPage from './components/landing_page/landing_page';
 import NotFound from './components/404';
 import './App.css';
@@ -6,10 +7,15 @@ import './scss/custom.scss';
 
 function App() {
   return (
-    <div>
-      {/* <LandingPage /> */}
-      <NotFound />
-    </div>
+    <Router>
+      <Switch>
+        {/* <LandingPage /> */}
+        {/* eventually replace below route with landing page */}
+        <Route exact path="/" component={NotFound} />
+        <Route component={NotFound} />
+        <NotFound />
+      </Switch>
+    </Router>
   );
 }
 
