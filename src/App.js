@@ -1,11 +1,14 @@
+import React from 'react';
+// import LandingPage from './components/landing_page/landing_page';
+import NotFound from './components/404';
 import './App.css';
 import './scss/custom.scss';
 
 function App() {
   return (
     <div>
-      <p>test</p>
-      <p className="test">test</p>
+      {/* <LandingPage /> */}
+      <NotFound />
     </div>
   );
 }
