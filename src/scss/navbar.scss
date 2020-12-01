@@ -1,0 +1,58 @@
+@import 'custom';
+@import 'fontsource-roboto';
+
+.navbar-scss {
+    background-color: $body-bg;
+    border-bottom: 1px solid $lightgray;
+    color: $body-color;
+}
+
+#responsive-navbar-nav {
+    font-family: $font-family-sans-serif;
+
+    a {
+        font-size: 16px;
+        color: $body-color;
+
+        &:hover {
+            color: $darkgray;
+            background-color: $yellow;
+        }
+
+        &.navbar-brand {
+            &:hover {
+                background-color: $body-bg;
+            }
+            & svg:hover path {
+                fill: $yellow;
+            }
+        }
+    }
+
+    .dropdown-menu {
+        background-color: $darkgray;
+    }
+
+    .dropdown-divider {
+        border-color: $lightgray;
+    }
+}
+
+#store-logo {
+    padding-right: 15px;
+}
+
+#store-name {
+    font-size: 18px;
+    font-weight: 100!important;
+    text-transform: uppercase;
+
+    &:hover {
+        color: $primary-light;
+    }
+}
+
+#navbar-search {
+    color: red;
+    background-color: $darkgray;
+}
