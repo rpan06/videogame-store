@@ -53,6 +53,13 @@
 }
 
 #navbar-search {
-    color: red;
+    font-size: 16px;
+    color: $primary-light;
     background-color: $darkgray;
+    border: none;
+}
+
+#searchbar-icon {
+    background-color: $darkgray;
+    border: none;
 }

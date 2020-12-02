@@ -5,14 +5,15 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
-import axios from 'axios';
+import InputGroup from 'react-bootstrap/InputGroup';
+// import axios from 'axios';
 
 import logo from '../../assets/logo.svg';
+import search from '../../assets/search.svg';
 
 import '../../scss/navbar.scss';
 
 export default function NavBar() {
-  // svg icons for account, favorites list, and cart
   const accountIcon = (
     <svg
       width="15"
@@ -86,27 +87,6 @@ export default function NavBar() {
     </svg>
   );
 
-  // axios call to get game categories
-  const apiCategories = {
-    method: 'GET',
-    url: 'https://rawg-video-games-database.p.rapidapi.com/genres',
-    headers: {
-      'x-rapidapi-key': '8e9c448cbdmsh45ad4f34f949b59p1baa83jsn8f4da2d85503',
-      'x-rapidapi-host': 'rawg-video-games-database.p.rapidapi.com',
-    },
-  };
-
-  function getCategories() {
-    axios
-      .request(apiCategories)
-      .then((res) => {
-        console.log(res.data.results);
-      })
-      .catch((error) => console.log(error));
-  }
-
-  getCategories();
-
   return (
     <>
       <Navbar
@@ -115,17 +95,52 @@ export default function NavBar() {
         variant="dark"
         className="navbar-scss"
       >
-        <Navbar.Brand as={Link} to="/" id="store-name">
+        <Navbar.Brand as={Link} to="/">
           <img src={logo} alt="logo" id="store-logo" />
+        </Navbar.Brand>
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          className="d-none d-xl-block"
+          id="store-name"
+        >
           Game Nation
+        </Navbar.Brand>
+        <Navbar.Brand
+          as={Link}
+          to="/account"
+          alt="account icon"
+          className="d-block d-md-none"
+        >
+          {accountIcon}
+        </Navbar.Brand>
+        <Navbar.Brand
+          as={Link}
+          to="/wishlist"
+          alt="favorites icon"
+          className="d-block d-md-none"
+        >
+          {favoritesIcon}
+        </Navbar.Brand>
+        <Navbar.Brand
+          as={Link}
+          to="/cart"
+          alt="cart icon"
+          className="d-block d-md-none"
+        >
+          {cartIcon}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link as={Link} to="/store">
+            <Nav.Link as={Link} to="/store" className="mx-1">
               Store
             </Nav.Link>
-            <NavDropdown title="Browse" id="collasible-nav-dropdown">
+            <NavDropdown
+              title="Browse"
+              id="collasible-nav-dropdown"
+              className="mx-1"
+            >
               <NavDropdown.Item as={Link} to="/action">
                 Action
               </NavDropdown.Item>
@@ -144,20 +159,42 @@ export default function NavBar() {
             </NavDropdown>
           </Nav>
           <Form inline>
-            <FormControl
-              type="text"
-              placeholder="Search"
-              className=" mr-sm-2"
-              id="navbar-search"
-            />
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text id="searchbar-icon">
+                  <img src={search} alt="search icon" />
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                type="text"
+                placeholder="Search"
+                className=" mr-sm-2"
+                id="navbar-search"
+              />
+            </InputGroup>
           </Form>
-          <Navbar.Brand as={Link} to="/account" alt="account icon">
+          <Navbar.Brand
+            as={Link}
+            to="/account"
+            alt="account icon"
+            className="d-none d-lg-block ml-4"
+          >
             {accountIcon}
           </Navbar.Brand>
-          <Navbar.Brand as={Link} to="/wishlist" alt="favorites icon">
+          <Navbar.Brand
+            as={Link}
+            to="/wishlist"
+            alt="favorites icon"
+            className="d-none d-lg-block ml-2"
+          >
             {favoritesIcon}
           </Navbar.Brand>
-          <Navbar.Brand as={Link} to="/cart" alt="cart icon">
+          <Navbar.Brand
+            as={Link}
+            to="/cart"
+            alt="cart icon"
+            className="d-none d-lg-block ml-1"
+          >
             {cartIcon}
           </Navbar.Brand>
         </Navbar.Collapse>
