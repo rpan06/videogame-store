@@ -8,6 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers/index';
 
 import App from './App';
+import 'fontsource-roboto';
 
 const store = createStore(rootReducer, {}, applyMiddleware(reduxPromise));
 
