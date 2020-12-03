@@ -9,7 +9,7 @@ export default class Carousel extends React.Component {
 
   render() {
     return (
-      <div className="pb-5">
+      <div>
         <div
           id="carouselIndicators"
           className="carousel slide"
