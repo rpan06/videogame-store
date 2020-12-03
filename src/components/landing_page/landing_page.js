@@ -1,28 +1,37 @@
-import React from 'react';
-import Carousel from './carousel';
-import GameList from './game_list';
+import React, { Component } from 'react';
+import getGameList from '../../actions/rawg-api';
+import CarouselBanner from './carousel_banner';
+import GameList from './game_list/game_list';
 import Ads from './ads';
 
-/* eslint-disable */
+export default class LandingPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      adsList: [],
+    };
+  }
 
-export default class LandingPage extends React.Component {
-  state = {};
-
-  componentDidMount() {}
-
-  handleChange = (event) => {};
-
-  handleSubmit = (event) => {};
+  async componentDidMount() {
+    this.setState({
+      adsList: await getGameList('genres', 'indie'),
+    });
+  }
 
   render() {
     return (
       <div className="container">
-        <Carousel />
-        <GameList />
-        <Ads />
+        <CarouselBanner />
+        <GameList queryCategory={null} queryItem={null} headerText="Popular" />
+        <Ads game={this.state.adsList[0]} buttonText="BUY NOW" />
+        {/* <GameList */}
+        <GameList
+          queryCategory="genres"
+          queryItem="adventure"
+          headerText="adventure"
+        />
+        <Ads game={this.state.adsList[1]} buttonText="Learn More" />
       </div>
     );
   }
 }
-
-/* eslint-enable */

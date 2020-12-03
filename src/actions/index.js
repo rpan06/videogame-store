@@ -19,16 +19,38 @@ const GAME_DATABASE_CONFIG = {
   },
 };
 
-export async function getGameList() {
+export async function getGameList(queryCategory = null, queryItem = null) {
+  // sample url with query string: https://rawg-video-games-database.p.rapidapi.com/games?genres=action
+  const query = queryCategory ? `?${queryCategory}=${queryItem}` : '';
   const options = {
     method: 'GET',
-    url: `${RAWG_CONFIG.baseUrl}games`,
+    url: `${RAWG_CONFIG.baseUrl}games${query}`,
     headers: RAWG_CONFIG.headers,
   };
 
   const response = axios
     .request(options)
-    .then((resp) => resp.data)
+    .then((resp) => resp.data.results)
+    .catch((error) => {
+      console.error(error);
+    });
+
+  return {
+    type: types.GET_GAME_LIST,
+    payload: response,
+  };
+}
+
+export async function getGenreList() {
+  const options = {
+    method: 'GET',
+    url: `${RAWG_CONFIG.baseUrl}genre`,
+    headers: RAWG_CONFIG.headers,
+  };
+
+  const response = axios
+    .request(options)
+    .then((resp) => resp.data.results)
     .catch((error) => {
       console.error(error);
     });

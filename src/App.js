@@ -14,7 +14,6 @@ function App() {
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route component={NotFound} />
-        {/* <NotFound /> */}
       </Switch>
       <ResponsiveFooter />
     </Router>
