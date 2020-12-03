@@ -7,7 +7,7 @@
   object-position: 0% 0%;
 }
 
-.game-info {
+.banner-info {
   background: $darkgray;
   height: 400px;
   display: flex;
@@ -23,7 +23,7 @@
 }
 
 @media (max-width: 576px) {
-  .game-info {
+  .banner-info {
     h1 {
       font-size: 2rem;
     }

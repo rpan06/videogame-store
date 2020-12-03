@@ -45,7 +45,7 @@ export default class BannerImage extends Component {
           src={backgroundImage}
           alt=""
         />
-        <div className="game-info col-12 col-lg-5 p-5">
+        <div className="banner-info col-12 col-lg-5 p-5">
           <h1 className="font-weight-extra-light pb-3">{name}</h1>
           <span className="w-100 text-secondary pb-2">{summary}</span>
           <h5 className="font-weight-light color-yellow">
