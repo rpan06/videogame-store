@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import getGameList from '../../actions/rawg-api';
-import CarouselBanner from './carousel_banner';
+import { getGameList } from '../../actions/rawg-api';
+import Carousel from './carousel_banner/carousel';
 import GameList from './game_list/game_list';
 import Ads from './ads';
 
@@ -20,11 +20,10 @@ export default class LandingPage extends Component {
 
   render() {
     return (
-      <div className="container">
-        <CarouselBanner />
+      <div className="container py-5">
+        <Carousel />
         <GameList queryCategory={null} queryItem={null} headerText="Popular" />
         <Ads game={this.state.adsList[0]} buttonText="BUY NOW" />
-        {/* <GameList */}
         <GameList
           queryCategory="genres"
           queryItem="adventure"
