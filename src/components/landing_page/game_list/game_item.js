@@ -1,7 +1,6 @@
 import React from 'react';
 import CalculatePrice from '../../../helper/calculatePrice';
 import '../../../scss/landing_page/game_list/game_item.scss';
-/* eslint-disable */
 
 export default (props) => {
   const { id, name, background_image: backgroundImage } = props.game;
@@ -9,7 +8,7 @@ export default (props) => {
 
   return (
     <div className="game-slide">
-      <img src={props.game.background_image} alt="" />
+      <img src={backgroundImage} alt="" />
       <div className="game-info">
         <div className="col-6 px-2">
           <p className="game-title">{name}</p>
@@ -21,5 +20,3 @@ export default (props) => {
     </div>
   );
 };
-
-/* eslint-enable */

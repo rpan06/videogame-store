@@ -1,51 +1,37 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getGameList } from '../../actions';
+import getGameList from '../../actions/rawg-api';
 import CarouselBanner from './carousel_banner';
 import GameList from './game_list/game_list';
 import Ads from './ads';
 
-/* eslint-disable */
-
-class LandingPage extends Component {
+export default class LandingPage extends Component {
   constructor(props) {
     super(props);
-    // state = {};
+    this.state = {
+      adsList: [],
+    };
   }
 
-  componentDidMount() {
-    this.props.getGameList('genres', 'indie');
+  async componentDidMount() {
+    this.setState({
+      adsList: await getGameList('genres', 'indie'),
+    });
   }
-
-  handleChange = (event) => {};
-
-  handleSubmit = (event) => {};
 
   render() {
     return (
       <div className="container">
         <CarouselBanner />
         <GameList queryCategory={null} queryItem={null} headerText="Popular" />
-        <Ads game={this.props.list[0]} buttonText="BUY NOW" />
+        <Ads game={this.state.adsList[0]} buttonText="BUY NOW" />
+        {/* <GameList */}
         <GameList
           queryCategory="genres"
-          queryItem="action"
-          headerText="action"
+          queryItem="adventure"
+          headerText="adventure"
         />
-        <Ads game={this.props.list[2]} buttonText="Learn More" />
+        <Ads game={this.state.adsList[1]} buttonText="Learn More" />
       </div>
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    list: state.list.list,
-  };
-}
-
-export default connect(mapStateToProps, {
-  getGameList,
-})(LandingPage);
-
-/* eslint-enable */

@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getGameList } from '../../../actions';
+import getGameList from '../../../actions/rawg-api';
 import GameItem from './game_item';
 import '../../../scss/landing_page/game_list/game_list.scss';
 
-/* eslint-disable */
-
-class GameList extends Component {
+export default class GameList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      list: [],
+    };
   }
 
-  componentDidMount() {
-    this.props.getGameList(this.props.queryCategory, this.props.queryItem);
+  async componentDidMount() {
+    this.setState({
+      list: await getGameList(this.props.queryCategory, this.props.queryItem),
+    });
   }
 
   render() {
-    if (!this.props.list) {
+    if (!this.state.list.length) {
       return (
         <div className="w-100 d-flex justify-content-center">
           <div className="lds-ellipsis">
@@ -30,9 +31,8 @@ class GameList extends Component {
         </div>
       );
     }
-    const galleryData = this.props.list.map((game, key) => (
-      <GameItem key={key} game={game} />
-    ));
+
+    const galleryData = this.state.list.map((game) => <GameItem game={game} />);
     return (
       <div className="py-5">
         <h4 className="font-weight-light text-uppercase pl-2">
@@ -45,15 +45,3 @@ class GameList extends Component {
     );
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    list: state.list.list,
-  };
-}
-
-export default connect(mapStateToProps, {
-  getGameList,
-})(GameList);
-
-/* eslint-enable */
