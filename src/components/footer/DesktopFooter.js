@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import '../scss/footer.scss';
+import '../../scss/footer.scss';
 
-import logo from '../assets/logo.svg';
-import facebook from '../assets/facebook.svg';
-import twitter from '../assets/twitter.svg';
-import instagram from '../assets/instagram.svg';
-import upchevron from '../assets/up-chevron.svg';
+import logo from '../../assets/logo.svg';
+import facebook from '../../assets/facebook.svg';
+import twitter from '../../assets/twitter.svg';
+import instagram from '../../assets/instagram.svg';
+import upchevron from '../../assets/up-chevron.svg';
 
-export default function Footer() {
+export default function DesktopFooter() {
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -81,12 +81,16 @@ export default function Footer() {
             </Col>
           </Row>
           <Row className="py-5">
-            <Col className="copyright">
+            <Col lg xs={{ span: 12 }} className="copyright">
               Copyright © 2020. Game Nation. All rights reserved.
             </Col>
-            <Col lg={{ order: 'last' }} xs={{ span: 12, order: 'first' }}>
-              <span className="pr-5">Terms and Conditions</span>
-              <span>Privacy Policy</span>
+            <Col lg xs={{ span: 12 }}>
+              <Link to="/" className="footer-link">
+                <span className="pr-5">Terms and Conditions</span>
+              </Link>
+              <Link to="/" className="footer-link">
+                <span>Privacy Policy</span>
+              </Link>
             </Col>
           </Row>
         </Container>
