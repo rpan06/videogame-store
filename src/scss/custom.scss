@@ -52,7 +52,6 @@ $lightgray: #333333;
 }
 
 // Sitewide styles
-
 ::-webkit-scrollbar {
   width: 15px;
 }
@@ -75,6 +74,14 @@ $lightgray: #333333;
   background-color: $yellow;
   border-color: $yellow;
   color: black;
+}
+
+.font-weight-extra-light {
+  font-weight: 100;
+}
+
+.color-yellow {
+  color: $yellow;
 }
 
 // Loading Spinner

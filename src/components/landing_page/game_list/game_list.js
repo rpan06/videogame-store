@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import getGameList from '../../../actions/rawg-api';
+import { getGameList } from '../../../actions/rawg-api';
 import GameItem from './game_item';
 import '../../../scss/landing_page/game_list/game_list.scss';
 

@@ -16,7 +16,7 @@ export default (props) => {
   }
   const { name, background_image: backgroundImage, metacritic } = props.game;
   return (
-    <div className="position-relative py-5">
+    <div className="position-relative pb-5">
       <img className="ad-image" src={backgroundImage} alt={name} />
       <div className="gradient-black-overlay" />
       <div className="ad-text">

@@ -1,0 +1,36 @@
+@import '../../custom';
+@import 'fontsource-roboto';
+
+// Override Bootstrap carousel defaults
+
+.carousel-indicators {
+  li {
+    background-color: $yellow !important;
+  }
+}
+
+// .carousel-control-prev,
+// .carousel-indicators {
+//   left: 58% !important;
+// }
+
+.carousel-control-prev,
+.carousel-control-next {
+  top: 93% !important;
+}
+
+@media (min-width: 960px) {
+  .carousel-indicators {
+    left: 58%;
+  }
+
+  .carousel-control-prev,
+  .carousel-indicators {
+    left: 58% !important;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    top: 86% !important;
+  }
+}
