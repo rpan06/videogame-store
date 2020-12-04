@@ -10,6 +10,29 @@ const RAWG_CONFIG = {
   },
 };
 
+export async function getGenreList() {
+  const options = {
+    method: 'GET',
+    url: 'https://rawg-video-games-database.p.rapidapi.com/genres',
+    headers: {
+      'x-rapidapi-key': config.RAWG_API_KEY,
+      'x-rapidapi-host': 'rawg-video-games-database.p.rapidapi.com',
+    },
+  };
+
+  let list;
+
+  await axios
+    .request(options)
+    .then((resp) => {
+      list = resp.data.results;
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  return list;
+}
+
 export async function getGameList(queryCategory = null, queryItem = null) {
   // sample url with query string: https://rawg-video-games-database.p.rapidapi.com/games?genres=action
   const query = queryCategory ? `?${queryCategory}=${queryItem}` : '';
