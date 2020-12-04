@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import InputGroup from 'react-bootstrap/InputGroup';
+import { Navbar, Nav, Form, FormControl, InputGroup } from 'react-bootstrap';
+import NavbarDropdown from './NavbarDropdown';
 // import axios from 'axios';
 
 import logo from '../../assets/logo.svg';
@@ -60,7 +56,7 @@ export default function NavBar() {
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* do not change to clipPatch, needs to have the - to display properly */}
-      <g clipPath="url(#clip0)">
+      <g clip-Path="url(#clip0)">
         <path
           d="M1.44632 1.28571H4.2149C4.31604 1.65 7.16432 11.9031 7.29847 12.3866C7.37561 12.6647 7.6289 12.8571 7.91775 12.8571H19.4892C19.775 12.8571 20.0266 12.6681 20.1063 12.3934L22.7206 3.39343C22.7772 3.19929 22.7386 2.98971 22.6173 2.82814C22.496 2.66657 22.3058 2.57143 22.1035 2.57143H5.90647L5.32318 0.471C5.24561 0.192429 4.99232 0 4.70347 0H1.44632C1.09147 0 0.803467 0.288 0.803467 0.642857C0.803467 0.997714 1.09147 1.28571 1.44632 1.28571ZM21.2472 3.85714L19.0062 11.5714H8.40632L6.26347 3.85714H21.2472Z"
           fill="white"
@@ -136,27 +132,7 @@ export default function NavBar() {
             <Nav.Link as={Link} to="/store" className="mx-1">
               Store
             </Nav.Link>
-            <NavDropdown
-              title="Browse"
-              id="collasible-nav-dropdown"
-              className="mx-1"
-            >
-              <NavDropdown.Item as={Link} to="/action">
-                Action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/indie">
-                Indie
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/adventure">
-                Adventure
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item as={Link} to="/rpg">
-                RPG
-              </NavDropdown.Item>
-            </NavDropdown>
+            <NavbarDropdown />
           </Nav>
           <Form inline>
             <InputGroup>
