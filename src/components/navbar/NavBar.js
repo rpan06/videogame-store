@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Form, FormControl, InputGroup } from 'react-bootstrap';
-// import axios from 'axios';
-// import { getGenreList } from '../../actions/rawg-api';
+import { getGenreList } from '../../actions/rawg-api';
 import NavbarDropdown from './NavbarDropdown';
-// import config from '../../config';
 
 import logo from '../../assets/logo.svg';
 import search from '../../assets/search.svg';
@@ -14,7 +12,9 @@ import '../../scss/navbar.scss';
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      genreList: [],
+    };
 
     this.accountIcon = (
       <svg
@@ -88,6 +88,14 @@ export default class NavBar extends Component {
         </defs>
       </svg>
     );
+  }
+
+  async componentDidMount() {
+    const genreResponse = await getGenreList();
+    this.setState({
+      genreList: genreResponse.map((res) => ({ id: res.id, name: res.name })),
+    });
+    console.log('from mount', this.state.genreList);
   }
 
   render() {
