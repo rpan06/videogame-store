@@ -95,7 +95,6 @@ export default class NavBar extends Component {
     this.setState({
       genreList: genreResponse.map((res) => ({ id: res.id, name: res.name })),
     });
-    console.log('from mount', this.state.genreList);
   }
 
   render() {
@@ -148,7 +147,7 @@ export default class NavBar extends Component {
               <Nav.Link as={Link} to="/store" className="mx-1">
                 Store
               </Nav.Link>
-              <NavbarDropdown />
+              <NavbarDropdown genreList={this.state.genreList} />
             </Nav>
             <Form inline>
               <InputGroup>
