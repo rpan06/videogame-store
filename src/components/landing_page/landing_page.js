@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getGameListData } from '../../actions/rawg-api';
+import { getGameList } from '../../actions/rawg-api';
 import Carousel from './carousel_banner/carousel';
 import GameList from './game_list/game_list';
 import Ads from './ads';
@@ -14,7 +14,7 @@ export default class LandingPage extends Component {
 
   async componentDidMount() {
     this.setState({
-      adsList: await getGameListData('genres', 'indie'),
+      adsList: await getGameList('genres', 'indie'),
     });
   }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Form, FormControl, InputGroup } from 'react-bootstrap';
-import { getGenreListData } from '../../actions/rawg-api';
+import { getGenreList } from '../../actions/rawg-api';
 import NavbarDropdown from './NavbarDropdown';
 
 import logo from '../../assets/logo.svg';
@@ -91,7 +91,7 @@ export default class NavBar extends Component {
   }
 
   async componentDidMount() {
-    const genreResponse = await getGenreListData();
+    const genreResponse = await getGenreList();
     this.setState({
       genreList: genreResponse.map((res) => ({ id: res.id, name: res.name })),
     });
