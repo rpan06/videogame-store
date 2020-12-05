@@ -3,29 +3,29 @@
 
 // Override Bootstrap carousel defaults
 
-.carousel-indicators {
+.carousel-indicators.landing-page {
   li {
     background-color: $yellow !important;
   }
 }
 
-.carousel-control-prev,
-.carousel-control-next {
+.carousel-control-prev.landing-page,
+.carousel-control-next.landing-page {
   top: 93% !important;
 }
 
 @media (min-width: 960px) {
-  .carousel-indicators {
+  .carousel-indicators.landing-page {
     left: 58%;
   }
 
-  .carousel-control-prev,
-  .carousel-indicators {
+  .carousel-control-prev.landing-page,
+  .carousel-indicators.landing-page {
     left: 58% !important;
   }
 
-  .carousel-control-prev,
-  .carousel-control-next {
+  .carousel-control-prev.landing-page,
+  .carousel-control-next.landing-page {
     top: 86% !important;
   }
 }

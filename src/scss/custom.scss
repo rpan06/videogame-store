@@ -70,18 +70,25 @@ $lightgray: #333333;
   border-radius: 50%;
 }
 
+a {
+  color: white;
+  &:hover {
+    color: $yellow;
+  }
+}
+
 .btn-yellow {
   background-color: $yellow;
   border-color: $yellow;
   color: black;
 }
 
-.font-weight-extra-light {
-  font-weight: 100;
-}
-
 .color-yellow {
   color: $yellow;
+}
+
+.font-weight-extra-light {
+  font-weight: 100;
 }
 
 // Loading Spinner

@@ -10,7 +10,7 @@ const RAWG_CONFIG = {
   },
 };
 
-export async function getGenreList() {
+export async function getGenreListData() {
   const options = {
     method: 'GET',
     url: 'https://rawg-video-games-database.p.rapidapi.com/genres',
@@ -33,7 +33,7 @@ export async function getGenreList() {
   return list;
 }
 
-export async function getGameList(queryCategory = null, queryItem = null) {
+export async function getGameListData(queryCategory = null, queryItem = null) {
   // sample url with query string: https://rawg-video-games-database.p.rapidapi.com/games?genres=action
   const query = queryCategory ? `?${queryCategory}=${queryItem}` : '';
   const options = {
@@ -55,7 +55,7 @@ export async function getGameList(queryCategory = null, queryItem = null) {
   return list;
 }
 
-export async function getSingleGameDetail(id) {
+export async function getSingleGameData(id) {
   const options = {
     method: 'GET',
     url: `${RAWG_CONFIG.baseUrl}games/${id}`,

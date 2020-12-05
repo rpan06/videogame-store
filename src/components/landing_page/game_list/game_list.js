@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { getGameList } from '../../../actions/rawg-api';
+import { getGameListData } from '../../../actions/rawg-api';
 import GameItem from './game_item';
+import LoadingSpinner from '../../shared/loading_spinner';
 import '../../../scss/landing_page/game_list/game_list.scss';
 
 export default class GameList extends Component {
@@ -14,22 +15,16 @@ export default class GameList extends Component {
 
   async componentDidMount() {
     this.setState({
-      list: await getGameList(this.props.queryCategory, this.props.queryItem),
+      list: await getGameListData(
+        this.props.queryCategory,
+        this.props.queryItem
+      ),
     });
   }
 
   render() {
     if (!this.state.list.length) {
-      return (
-        <div className="w-100 d-flex justify-content-center">
-          <div className="lds-ellipsis">
-            <div />
-            <div />
-            <div />
-            <div />
-          </div>
-        </div>
-      );
+      return <LoadingSpinner />;
     }
 
     const galleryData = this.state.list.map((game) => <GameItem game={game} />);
