@@ -72,7 +72,7 @@ $lightgray: #333333;
 
 a {
   color: white;
-  :hover {
+  &:hover {
     color: $yellow;
   }
 }
