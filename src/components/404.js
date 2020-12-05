@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-/* eslint-disable */
-
-export default (props) => {
+export default () => {
   const container = {
     height: '100vh',
     display: 'flex',
@@ -23,10 +21,12 @@ export default (props) => {
           The page you are looking for cannot be found. It might have been
           deleted or moved!
         </p>
-        <Link to="/">Back To Home</Link>
+        <button className="btn btn-yellow btn-sm px-5 mt-4" type="button">
+          <Link to="/">
+            <span className="text-dark">Back To Home</span>
+          </Link>
+        </button>
       </div>
     </div>
   );
 };
-
-/* eslint-enable */
