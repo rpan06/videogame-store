@@ -1,14 +1,7 @@
 import axios from 'axios';
 import types from './types';
 import config from '../config';
-
-const RAWG_CONFIG = {
-  baseUrl: 'https://rawg-video-games-database.p.rapidapi.com/',
-  headers: {
-    'x-rapidapi-key': config.RAWG_API_KEY,
-    'x-rapidapi-host': 'rawg-video-games-database.p.rapidapi.com',
-  },
-};
+import { getGameListData, getSingleGameData } from './rawg-api';
 
 const GAME_DATABASE_CONFIG = {
   baseUrl: 'https://gamedatabasestefan-skliarovv1.p.rapidapi.com/',
@@ -19,21 +12,11 @@ const GAME_DATABASE_CONFIG = {
   },
 };
 
-export async function getGameList(queryCategory = null, queryItem = null) {
-  // sample url with query string: https://rawg-video-games-database.p.rapidapi.com/games?genres=action
-  const query = queryCategory ? `?${queryCategory}=${queryItem}` : '';
-  const options = {
-    method: 'GET',
-    url: `${RAWG_CONFIG.baseUrl}games${query}`,
-    headers: RAWG_CONFIG.headers,
-  };
-
-  const response = axios
-    .request(options)
-    .then((resp) => resp.data.results)
-    .catch((error) => {
-      console.error(error);
-    });
+export async function getGameListAction(
+  queryCategory = null,
+  queryItem = null
+) {
+  const response = getGameListData(queryCategory, queryItem);
 
   return {
     type: types.GET_GAME_LIST,
@@ -41,27 +24,22 @@ export async function getGameList(queryCategory = null, queryItem = null) {
   };
 }
 
-export async function getGenreList() {
-  const options = {
-    method: 'GET',
-    url: `${RAWG_CONFIG.baseUrl}genre`,
-    headers: RAWG_CONFIG.headers,
-  };
-
-  const response = axios
-    .request(options)
-    .then((resp) => resp.data.results)
-    .catch((error) => {
-      console.error(error);
-    });
+export async function getSingleGameAction(id) {
+  const response = getSingleGameData(id);
 
   return {
-    type: types.GET_GAME_LIST,
+    type: types.GET_SINGLE_GAME,
     payload: response,
   };
 }
 
-export async function getReviews() {
+export function clearSingleItemAction() {
+  return {
+    type: types.CLEAR_SINGLE_GAME,
+  };
+}
+
+export async function getReviewsAction() {
   const options = {
     method: 'POST',
     url: `${GAME_DATABASE_CONFIG.baseUrl}getReviews`,
@@ -81,7 +59,7 @@ export async function getReviews() {
     });
 
   return {
-    type: types.GET_GAME_LIST,
+    type: types.GET_REVIEWS_LIST,
     payload: response,
   };
 }
@@ -112,12 +90,6 @@ export async function getReviews() {
 //   return {
 //     type: types.GET_SINGLE_ITEM,
 //     payload: resp.data.data,
-//   };
-// }
-
-// export function clearSingleItem() {
-//   return {
-//     type: types.CLEAR_SINGLE_ITEM,
 //   };
 // }
 
