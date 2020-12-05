@@ -1,20 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import LoadingSpinner from '../shared/loading_spinner';
 import '../../scss/landing_page/ads.scss';
 
 export default (props) => {
   if (!props.game) {
-    return (
-      <div className="w-100 d-flex justify-content-center">
-        <div className="lds-ellipsis">
-          <div />
-          <div />
-          <div />
-          <div />
-        </div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
-  const { name, background_image: backgroundImage, metacritic } = props.game;
+  const {
+    id,
+    name,
+    background_image: backgroundImage,
+    metacritic,
+  } = props.game;
   return (
     <div className="position-relative">
       <img className="ad-image" src={backgroundImage} alt={name} />
@@ -26,7 +24,9 @@ export default (props) => {
           {metacritic}
         </h6>
         <button className="btn btn-yellow btn-sm px-5" type="button">
-          {props.buttonText}
+          <Link to={`/game/${id}`}>
+            <span className="text-dark">{props.buttonText}</span>
+          </Link>
         </button>
       </div>
     </div>
