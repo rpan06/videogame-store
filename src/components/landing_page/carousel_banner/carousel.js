@@ -16,7 +16,7 @@ export default class Carousel extends React.Component {
           data-ride="carousel"
           data-interval="10000"
         >
-          <ol className="carousel-indicators landing-page">
+          <ol className="carousel-indicators">
             <li
               data-target="#carouselIndicators"
               data-slide-to="0"
@@ -37,7 +37,7 @@ export default class Carousel extends React.Component {
             </div>
           </div>
           <a
-            className="carousel-control-prev landing-page"
+            className="carousel-control-prev"
             href="#carouselIndicators"
             role="button"
             data-slide="prev"
@@ -46,7 +46,7 @@ export default class Carousel extends React.Component {
             <span className="sr-only">Previous</span>
           </a>
           <a
-            className="carousel-control-next landing-page"
+            className="carousel-control-next"
             href="#carouselIndicators"
             role="button"
             data-slide="next"
