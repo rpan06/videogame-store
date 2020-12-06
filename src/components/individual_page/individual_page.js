@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import LoadingSpinner from '../shared/loading_spinner';
 import IndividualPageBanner from './individual_page_banner';
+import GameInfoPage from './game_info/GameInfoPage';
 import { getSingleGameAction, clearSingleItemAction } from '../../actions';
 
 class IndividualPage extends Component {
@@ -36,6 +37,7 @@ class IndividualPage extends Component {
     return (
       <div className="container py-5">
         <IndividualPageBanner game={this.props.item} />
+        <GameInfoPage game={this.props.item} />
       </div>
     );
   }
