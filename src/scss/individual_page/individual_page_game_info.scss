@@ -1,0 +1,21 @@
+@import '../custom.scss';
+
+.about-game {
+    font-size: 20px;
+}
+
+#game-info-container {
+    font-size: 16px;
+    
+    h5 {
+        font-size: 16px;
+        color: $primary-light;
+        font-weight: 400;
+    }
+
+    .desc {
+        white-space: pre-line;
+        margin-left: 0;
+        padding-left: 0;
+    }
+}
