@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../scss/shared/loading_spinner.scss';
 
 export default () => {
   return (
