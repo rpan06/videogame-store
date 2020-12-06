@@ -40,10 +40,10 @@ class IndividualPage extends Component {
       <div className="container py-5">
         <IndividualPageBanner game={this.props.item} />
         <GameInfoPage game={this.props.item} />
-        <FollowUs game={this.props.item} />
         {this.props.item.metacritic_platforms && (
           <Reviews metacriticReviews={this.props.item.metacritic_platforms} />
         )}
+        <FollowUs game={this.props.item} />
       </div>
     );
   }

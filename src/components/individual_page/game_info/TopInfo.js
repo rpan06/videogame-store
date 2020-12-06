@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import LoadingSpinner from '../../shared/loading_spinner';
-import SanitizedHTML from 'react-sanitized-html';
+import SanitizedHTML from 'sanitize-html';
 
 export default class TopInfo extends Component {
   isEmpty(obj) {
@@ -11,7 +11,7 @@ export default class TopInfo extends Component {
 
   render() {
     if (this.isEmpty(this.props.game)) {
-      return <LoadingSpinner />
+      return <LoadingSpinner />;
     } else {
       return (
         <>
