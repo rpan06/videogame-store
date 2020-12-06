@@ -8,10 +8,10 @@ export default (props) => {
   const { website, reddit_url: redditUrl } = props.game;
   return (
     <div className="row py-5">
-      <div className="col-12 col-md-4 text-center">
+      <div className="col-12 col-md-2 text-center pb-4">
         <h2 className="font-weight-extra-light">FOLLOW US</h2>
       </div>
-      <div className="col-12 col-md-8 individual-page-section d-flex justify-content-center social-icons">
+      <div className="col-12 col-md-10 individual-page-section d-flex justify-content-center social-icons">
         {website && (
           <a href={website} target="_blank" rel="noreferrer">
             <img src={globeImage} alt="globe icon" className="mx-4" />
