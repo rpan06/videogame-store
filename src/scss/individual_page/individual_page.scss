@@ -1,0 +1,35 @@
+@import '../custom';
+@import 'fontsource-roboto';
+
+.individual-page-section {
+  background-color: $darkgray;
+  padding: 3rem;
+  border-radius: 5px;
+}
+
+.social-icons img {
+  height: 40px;
+  width: 40px;
+  opacity: 100%;
+  &:hover {
+    opacity: 50%;
+  }
+}
+
+.review-item {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  a:hover {
+    text-decoration: none;
+    color: white;
+    opacity: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .review-item {
+    min-width: 30%;
+  }
+}
