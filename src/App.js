@@ -5,6 +5,7 @@ import IndividualPage from './components/individual_page/individual_page';
 import NotFound from './components/404';
 import NavBar from './components/navbar/NavBar';
 import ResponsiveFooter from './components/footer/ResponsiveFooter';
+import BrowsePage from './components/browse/BrowsePage';
 import './App.css';
 import './scss/custom.scss';
 
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route path="/game/:id" component={IndividualPage} />
+        <Route path="/browse/:category" component={BrowsePage} />
         <Route component={NotFound} />
       </Switch>
       <ResponsiveFooter />
