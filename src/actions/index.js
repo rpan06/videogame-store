@@ -9,9 +9,10 @@ import {
 
 export async function getGameListAction(
   queryCategory = null,
-  queryItem = null
+  queryItem = null,
+  querySort = null
 ) {
-  const response = getGameListData(queryCategory, queryItem);
+  const response = getGameListData(queryCategory, queryItem, querySort);
 
   return {
     type: types.GET_GAME_LIST,

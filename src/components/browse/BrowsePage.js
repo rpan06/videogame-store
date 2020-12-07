@@ -15,7 +15,6 @@ class BrowsePage extends Component {
 
     this.state = {
       path: props.match.path,
-      resultsPath: '/',
       genreList: [],
       gameList: [],
     };
@@ -26,20 +25,29 @@ class BrowsePage extends Component {
 
   async componentDidMount() {
     const genreResponse = await getGenreListData();
-    if (this.props.location.state) {
-      this.setState({
-        resultsPath: this.props.location.state.resultsPath,
-      });
-    }
-
     this.setState({
-      genreList: genreResponse.map((res) => ({ id: res.id, name: res.name })),
+      // genreList: genreResponse.map((res) => ({ id: res.id, name: res.name })),
       gameList: await getGameListData(
-        'genre',
+        'genres',
         this.props.match.params.category,
-        'released'
+        'rating'
       ),
+      path: this.props.location.pathname,
     });
+    console.log('games list param', this.props.match.params.category, 'gameslist', this.state.gameList);
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    // console.log('updated', prevProps, prevState);
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      console.log(prevProps.match.params.category, this.props.match.params.category);
+      const list = await getGameListData(
+        'genres',
+        this.props.match.params.category,
+        'rating'
+      );
+      console.log('updated', list);
+    }
   }
 
   componentWillUnmount() {
@@ -85,7 +93,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  getGameListData,
-  getGenreListData,
-  clearGameListAction,
+  clearGameListAction
 })(BrowsePage);
