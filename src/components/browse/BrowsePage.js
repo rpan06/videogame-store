@@ -14,39 +14,36 @@ class BrowsePage extends Component {
     super(props);
 
     this.state = {
-      path: props.match.path,
       genreList: [],
       gameList: [],
+      currentSelection: null,
     };
 
-    console.log('props', props, this.state.path);
-    console.log('category', this.props.match.params.category);
+    console.log(props);
   }
 
   async componentDidMount() {
     const genreResponse = await getGenreListData();
     this.setState({
-      // genreList: genreResponse.map((res) => ({ id: res.id, name: res.name })),
+      genreList: genreResponse.map((res) => ({ id: res.id, name: res.name, slug: res.slug })),
       gameList: await getGameListData(
         'genres',
         this.props.match.params.category,
         'rating'
       ),
-      path: this.props.location.pathname,
+      currentSelection: this.props.match.params.category,
     });
-    console.log('games list param', this.props.match.params.category, 'gameslist', this.state.gameList);
   }
 
-  async componentDidUpdate(prevProps, prevState) {
-    // console.log('updated', prevProps, prevState);
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
-      console.log(prevProps.match.params.category, this.props.match.params.category);
-      const list = await getGameListData(
+      getGameListData(
         'genres',
         this.props.match.params.category,
         'rating'
-      );
-      console.log('updated', list);
+      ).then((result) => this.setState({
+        gameList: result
+      }));
     }
   }
 
@@ -68,7 +65,7 @@ class BrowsePage extends Component {
         <Row>
           <Col xs={{ order: 2 }} lg={{ span: 10, order: 1 }}>
             <div className="pb-2">
-              <p>Browsing <span className="browsing-title">{this.props.match.params.category}</span> Games</p>
+              <p>Browsing <span className="browsing-title">{this.props.location.paramName ? this.props.location.paramName : this.props.match.params.category.replace(/-/g, ' ')}</span> Games</p>
             </div>
             <div className="d-flex flex-wrap align-content-center">
               {galleryData}
@@ -77,7 +74,6 @@ class BrowsePage extends Component {
           <Col xs={{ span: 12, order: 1 }} lg={{ span: 2, order: 2 }}>
             <CategoryList
               genreList={this.state.genreList}
-              selectCategory={this.selectCategory}
             />
           </Col>
         </Row>

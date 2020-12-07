@@ -93,7 +93,11 @@ export default class NavBar extends Component {
   async componentDidMount() {
     const genreResponse = await getGenreListData();
     this.setState({
-      genreList: genreResponse.map((res) => ({ id: res.id, name: res.name })),
+      genreList: genreResponse.map((res) => ({
+        id: res.id,
+        name: res.name,
+        slug: res.slug,
+      })),
     });
   }
 

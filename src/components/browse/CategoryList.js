@@ -4,12 +4,12 @@ import CategoryListItem from './CategoryListItem';
 import '../../scss/browse/browse.scss';
 
 export default function CategoryList(props) {
-  const selectCategory = props.selectCategory;
   const categoryItems = props.genreList.map((genre) => (
     <CategoryListItem
       key={genre.id}
       id={genre.id}
       name={genre.name}
+      slug={genre.slug}
     />
   ));
   return (
