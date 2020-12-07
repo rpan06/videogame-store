@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -16,34 +15,36 @@ class BrowsePage extends Component {
     this.state = {
       genreList: [],
       gameList: [],
-      currentSelection: null,
     };
-
-    console.log(props);
   }
 
   async componentDidMount() {
     const genreResponse = await getGenreListData();
     this.setState({
-      genreList: genreResponse.map((res) => ({ id: res.id, name: res.name, slug: res.slug })),
+      genreList: genreResponse.map((res) => ({
+        id: res.id,
+        name: res.name,
+        slug: res.slug,
+      })),
       gameList: await getGameListData(
         'genres',
         this.props.match.params.category,
         'rating'
       ),
-      currentSelection: this.props.match.params.category,
     });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (prevProps.location.pathname !== this.props.location.pathname) {
       getGameListData(
         'genres',
         this.props.match.params.category,
         'rating'
-      ).then((result) => this.setState({
-        gameList: result
-      }));
+      ).then((result) =>
+        this.setState({
+          gameList: result,
+        })
+      );
     }
   }
 
@@ -65,16 +66,29 @@ class BrowsePage extends Component {
         <Row>
           <Col xs={{ order: 2 }} lg={{ span: 10, order: 1 }}>
             <div className="pb-2">
-              <p>Browsing <span className="browsing-title">{this.props.location.paramName ? this.props.location.paramName : this.props.match.params.category.replace(/-/g, ' ')}</span> Games</p>
+              <p>
+                {`Browsing `}
+                <span className="browsing-title">
+                  {this.props.location.paramName
+                    ? this.props.location.paramName
+                    : this.props.match.params.category.replace(/-/g, ' ')}
+                </span>
+                {` Games`}
+              </p>
             </div>
-            <div className="d-flex flex-wrap align-content-center">
+            <div
+              className="d-flex flex-wrap align-content-center"
+              id="game-container"
+            >
               {galleryData}
             </div>
           </Col>
-          <Col xs={{ span: 12, order: 1 }} lg={{ span: 2, order: 2 }}>
-            <CategoryList
-              genreList={this.state.genreList}
-            />
+          <Col
+            xs={{ span: 12, order: 1 }}
+            lg={{ span: 2, order: 2 }}
+            className="d-none d-lg-block"
+          >
+            <CategoryList genreList={this.state.genreList} />
           </Col>
         </Row>
       </Container>
@@ -89,5 +103,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, {
-  clearGameListAction
+  clearGameListAction,
 })(BrowsePage);
