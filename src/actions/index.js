@@ -1,25 +1,30 @@
-import axios from 'axios';
+// import axios from 'axios';
 import types from './types';
-import config from '../config';
-import { getGameListData, getSingleGameData } from './rawg-api';
-
-const GAME_DATABASE_CONFIG = {
-  baseUrl: 'https://gamedatabasestefan-skliarovv1.p.rapidapi.com/',
-  headers: {
-    'content-type': 'application/x-www-form-urlencoded',
-    'x-rapidapi-key': config.GAMEDATABASE_API_KEY,
-    'x-rapidapi-host': 'GameDatabasestefan-skliarovV1.p.rapidapi.com',
-  },
-};
+// import config from '../config';
+import {
+  getGameListData,
+  getSingleGameData,
+  getGenreListData,
+} from './rawg-api';
 
 export async function getGameListAction(
   queryCategory = null,
-  queryItem = null
+  queryItem = null,
+  querySort = null
 ) {
-  const response = getGameListData(queryCategory, queryItem);
+  const response = getGameListData(queryCategory, queryItem, querySort);
 
   return {
     type: types.GET_GAME_LIST,
+    payload: response,
+  };
+}
+
+export async function getGenreListAction() {
+  const response = getGenreListData();
+
+  return {
+    type: types.GET_GENRE_LIST,
     payload: response,
   };
 }
@@ -39,28 +44,9 @@ export function clearSingleItemAction() {
   };
 }
 
-export async function getReviewsAction() {
-  const options = {
-    method: 'POST',
-    url: `${GAME_DATABASE_CONFIG.baseUrl}getReviews`,
-    headers: GAME_DATABASE_CONFIG.headers,
-    data: {
-      reviewIds: 'undefined',
-      userKey: 'undefined',
-      requestUrl: 'undefined',
-    },
-  };
-
-  const response = axios
-    .request(options)
-    .then((resp) => resp.data)
-    .catch((error) => {
-      console.error(error);
-    });
-
+export function clearGameListAction() {
   return {
-    type: types.GET_REVIEWS_LIST,
-    payload: response,
+    type: types.CLEAR_GAME_LIST,
   };
 }
 

@@ -5,7 +5,12 @@ import '../../scss/navbar.scss';
 
 export default function NavbarDropdown(props) {
   const dropdownItem = props.genreList.map((genre) => (
-    <NavbarDropdownItem key={genre.id} id={genre.id} name={genre.name} />
+    <NavbarDropdownItem
+      key={genre.id}
+      id={genre.id}
+      name={genre.name}
+      slug={genre.slug}
+    />
   ));
 
   return (
