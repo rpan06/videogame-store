@@ -1,64 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Form, InputGroup, FormControl } from 'react-bootstrap';
 import search from '../../assets/search.svg';
 import '../../scss/navbar.scss';
 
-// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 require('es6-promise').polyfill();
-// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 require('isomorphic-fetch');
 
-export default function Searchbar() {
-  const [searchTerm, setSearchTerm] = useState('');
+class Searchbar extends Component {
+  constructor(props) {
+    super(props);
 
-  const history = useHistory();
+    this.state = {
+      value: null,
+    };
+  }
 
-  // saves what the user is typing in the search field
-  const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-    console.log('searchterm', searchTerm);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('submitting', searchTerm);
-    console.log('in submit', searchTerm);
-    history.push({
-      pathname: '/search',
-      search: `?query=${searchTerm}`,
+  handleChange = (e) => {
+    this.setState({ value: e.target.value }, () => {
+      console.log(this.state.value);
     });
   };
 
-  useEffect(() => {
-    const listener = (e) => {
-      if (e.code === 'Enter' || e.code === 'NumpadEnter') {
-        e.preventDefault();
-        handleSubmit(e);
-      }
-    };
-    document.addEventListener('keydown', listener);
-    return () => {
-      document.removeEventListener('keydown', listener);
-    };
-  }, []);
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('in submit', this.state.value);
+    this.props.history.replace({
+      pathname: '/search',
+      search: `?query=${this.state.value}`,
+    });
+  };
 
-  return (
-    <Form inline id="form-id">
-      <InputGroup>
-        <InputGroup.Prepend>
-          <InputGroup.Text id="searchbar-icon">
-            <img src={search} alt="search icon" />
-          </InputGroup.Text>
-        </InputGroup.Prepend>
-        <FormControl
-          type="text"
-          placeholder="Search"
-          className=" mr-sm-2"
-          id="navbar-search"
-          onChange={handleChange}
-        />
-      </InputGroup>
-    </Form>
-  );
+  render() {
+    return (
+      <Form inline id="form-id" onSubmit={this.handleSubmit}>
+        <InputGroup>
+          <InputGroup.Prepend>
+            <InputGroup.Text id="searchbar-icon">
+              <img src={search} alt="search icon" />
+            </InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
+            type="text"
+            placeholder="Search"
+            className=" mr-sm-2"
+            id="navbar-search"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+        </InputGroup>
+      </Form>
+    );
+  }
 }
+
+export default withRouter(Searchbar);
