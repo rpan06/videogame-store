@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Form, FormControl, InputGroup } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { getGenreListData } from '../../actions/rawg-api';
 import NavbarDropdown from './NavbarDropdown';
+import Searchbar from '../search/Searchbar';
 
 import logo from '../../assets/logo.svg';
-import search from '../../assets/search.svg';
 
 import '../../scss/navbar.scss';
 
@@ -153,21 +153,7 @@ export default class NavBar extends Component {
               </Nav.Link>
               <NavbarDropdown genreList={this.state.genreList} />
             </Nav>
-            <Form inline>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="searchbar-icon">
-                    <img src={search} alt="search icon" />
-                  </InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  type="text"
-                  placeholder="Search"
-                  className=" mr-sm-2"
-                  id="navbar-search"
-                />
-              </InputGroup>
-            </Form>
+            <Searchbar />
             <Navbar.Brand
               as={Link}
               to="/account"
