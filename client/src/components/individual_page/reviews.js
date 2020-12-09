@@ -10,9 +10,9 @@ export default (props) => {
       </div>
       <div className="col-12 col-md-10 individual-page-section d-flex justify-content-center flex-wrap">
         {props.metacriticReviews.map((item) => (
-          <div className="review-item mx-1">
+          <div className="review-item mx-1" key={item.id}>
             <a href={item.url} target="_blank" rel="noreferrer">
-              <PercentageCircle percentage={item.metascore} />
+              <PercentageCircle percentage={item.metascore} key={item.id} />
               <p>
                 <small>{item.platform.name}</small>
               </p>

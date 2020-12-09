@@ -12,7 +12,7 @@ class Searchbar extends Component {
     super(props);
 
     this.state = {
-      value: null,
+      value: '',
     };
   }
 
