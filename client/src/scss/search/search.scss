@@ -1,8 +1,28 @@
+@import '../custom.scss';
+
+.search-header {
+  font-size: 16px;
+  color: $body-color;
+}
+
+.gray-border {
+  border-bottom: 1px solid transparent;
+}
+
 @media only screen and(max-width: 699px) {
     #search-container {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    .search-header {
+      display: flex;
+      justify-content: center;
+    }
+
+    .gray-border {
+      border-bottom: 1px solid $lightgray;
     }
 }

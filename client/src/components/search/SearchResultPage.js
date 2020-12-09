@@ -29,16 +29,21 @@ export default function SearchResultPage(props) {
 
   let gameData = null;
 
-  if(!data.results) {
+  if (!data.results) {
     return <LoadingSpinner />
   }
 
-  if(data.results){
+  if (data.results) {
     gameData = data.results.map((data) => <GameItem game={data} />);
   }
 
   return (
     <Container className="py-5">
+      <Row>
+        <Col className="pb-3 mb-4 gray-border">
+          <span className="search-header pl-2">Search Results</span>
+        </Col>
+      </Row>
       <Row>
         <Col id="search-container">
           {gameData}
