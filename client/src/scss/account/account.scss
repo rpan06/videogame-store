@@ -1,0 +1,25 @@
+@import '../custom.scss';
+
+#account-container {
+    .account-box {
+      background-color: $darkgray;
+    }
+
+    h5 {
+        font-size: 36px;
+    }
+
+    .form-label, input {
+      font-size: 16px;
+    }
+
+    input {
+      color: $body-color;
+      background-color: $lightgray;
+      border: none;
+    }
+
+    ::placeholder {
+      color: transparent;
+    }
+}
