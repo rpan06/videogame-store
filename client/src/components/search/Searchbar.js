@@ -17,14 +17,11 @@ class Searchbar extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({ value: e.target.value }, () => {
-      console.log(this.state.value);
-    });
+    this.setState({ value: e.target.value });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log('in submit', this.state.value);
     this.props.history.replace({
       pathname: '/search',
       search: `?query=${this.state.value}`,
