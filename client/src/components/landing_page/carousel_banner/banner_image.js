@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getSingleGameData } from '../../../actions/rawg-api';
-import shortenSummary from '../../../helper/shortenSummary';
+import ShortenSummary from '../../../helper/ShortenSummary';
 import LoadingSpinner from '../../shared/loading_spinner';
 import '../../../scss/landing_page/carousel_banner/banner_image.scss';
 
@@ -31,7 +31,7 @@ export default class BannerImage extends Component {
       background_image_additional: backgroundImage,
       description_raw: description,
     } = this.state.game;
-    const summary = shortenSummary(description);
+    const summary = ShortenSummary(description);
     return (
       <div className="row">
         <img

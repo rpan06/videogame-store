@@ -34,7 +34,9 @@ export default function SearchResultPage(props) {
   }
 
   if (data.results) {
-    gameData = data.results.map((gameRes) => <GameItem game={gameRes} />);
+    gameData = data.results.map((gameRes) => (
+      <GameItem game={gameRes} key={gameRes.id} />
+    ));
   }
 
   return (
