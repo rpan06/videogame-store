@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getSingleGameData } from '../../../actions/rawg-api';
-import ShortenSummary from '../../../helper/ShortenSummary';
+import ShortenSummary from '../../../helper/shortenSummary';
 import LoadingSpinner from '../../shared/loading_spinner';
 import '../../../scss/landing_page/carousel_banner/banner_image.scss';
 

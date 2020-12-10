@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Col, Row, Image, Button } from 'react-bootstrap';
 import CalculatePrice from '../../../helper/calculatePrice';
-import ShortenSummary from '../../../helper/ShortenSummary';
+import ShortenSummary from '../../../helper/shortenSummary';
 import { addGameToShoppingCartAction } from '../../../actions';
 
 class Overview extends Component {

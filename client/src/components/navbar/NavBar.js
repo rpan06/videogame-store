@@ -123,7 +123,7 @@ export default class NavBar extends Component {
           </Navbar.Brand>
           <Navbar.Brand
             as={Link}
-            to="/account"
+            to="/register"
             alt="account icon"
             className="d-block d-md-none"
           >
@@ -156,7 +156,7 @@ export default class NavBar extends Component {
             <Searchbar />
             <Navbar.Brand
               as={Link}
-              to="/account"
+              to="/register"
               alt="account icon"
               className="d-none d-lg-block ml-4"
             >
