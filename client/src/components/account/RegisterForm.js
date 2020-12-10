@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Col } from 'react-bootstrap';
+import { createAccount } from '../../actions/user';
 
 export default class RegisterForm extends Component {
   constructor(props) {
@@ -9,9 +10,9 @@ export default class RegisterForm extends Component {
     this.state = {
       firstName: '',
       lastName: '',
-      username: '',
       email: '',
       password: '',
+      confirmPassword: '',
       validated: false,
     };
   }
@@ -23,12 +24,25 @@ export default class RegisterForm extends Component {
       e.preventDefault();
       e.stopPropagation();
     }
+    // Checks to make sure the passwords match, and then checks to see that all of the forms have been filled out
+    // else if (password === confirmPassword && this.state.validated !== false) {
+    // Calls the api
+    createAccount({
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password,
+      confirmPassword: this.state.confirmPassword,
+    });
 
     this.setState({
       validated: true,
     });
 
-    // Add registration api here
+    // const { password, confirmPassword } = this.state;
+    // if (password !== confirmPassword) {
+    //   alert("Passwords don't match");
+    // }
   };
 
   render() {
@@ -69,19 +83,6 @@ export default class RegisterForm extends Component {
           </Form.Group>
         </Form.Row>
 
-        <Form.Group controlId="formGridUsername">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            required
-            placeholder="Username"
-            value={this.state.username}
-            onChange={(e) => this.setState({ username: e.target.value })}
-          />
-          <Form.Control.Feedback type="invalid">
-            Please enter a username.
-          </Form.Control.Feedback>
-        </Form.Group>
-
         <Form.Group controlId="formGridEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -100,11 +101,29 @@ export default class RegisterForm extends Component {
           <Form.Control
             required
             placeholder="Password"
+            type="password"
             value={this.state.password}
             onChange={(e) => this.setState({ password: e.target.value })}
           />
+          <Form.Text id="passwordHelpBlock" muted>
+            Your password must be at least 6 characters long.
+          </Form.Text>
           <Form.Control.Feedback type="invalid">
             Please enter a password.
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group controlId="formGridConfirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control
+            required
+            placeholder="Confirm password"
+            type="password"
+            value={this.state.confirmPassword}
+            onChange={(e) => this.setState({ confirmPassword: e.target.value })}
+          />
+          <Form.Control.Feedback type="invalid">
+            Please confirm your password.
           </Form.Control.Feedback>
         </Form.Group>
 

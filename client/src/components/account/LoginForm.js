@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import { loginAccount } from '../../actions/user';
 
 export default class LoginForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: '',
       validated: false,
     };
@@ -21,11 +22,18 @@ export default class LoginForm extends Component {
       e.stopPropagation();
     }
 
+    // API call
+    loginAccount({
+      email: this.state.email,
+      password: this.state.password,
+    });
+
+    e.preventDefault();
+    e.stopPropagation();
+
     this.setState({
       validated: true,
     });
-
-    // Add login api here
   };
 
   render() {
@@ -36,16 +44,16 @@ export default class LoginForm extends Component {
         onSubmit={this.handleSubmit}
         className="py-4"
       >
-        <Form.Group controlId="formGridUsername">
-          <Form.Label>Username</Form.Label>
+        <Form.Group controlId="formGridEmail">
+          <Form.Label>Email</Form.Label>
           <Form.Control
             required
-            placeholder="Username"
-            value={this.state.username}
-            onChange={(e) => this.setState({ username: e.target.value })}
+            placeholder="Email"
+            value={this.state.email}
+            onChange={(e) => this.setState({ email: e.target.value })}
           />
           <Form.Control.Feedback type="invalid">
-            Please enter your username.
+            Please enter your email address.
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -54,6 +62,7 @@ export default class LoginForm extends Component {
           <Form.Control
             required
             placeholder="Password"
+            type="password"
             value={this.state.password}
             onChange={(e) => this.setState({ password: e.target.value })}
           />
