@@ -9,6 +9,7 @@ import BrowsePage from './components/browse/BrowsePage';
 import SearchResultPage from './components/search/SearchResultPage';
 import ShoppingCart from './components/shopping_cart/shopping_cart';
 import CreateAccount from './components/account/CreateAccount';
+import Login from './components/account/Login';
 import './App.css';
 import './scss/custom.scss';
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/search" component={SearchResultPage} />
         <Route path="/cart" component={ShoppingCart} />
         <Route path="/register" component={CreateAccount} />
+        <Route path="/login" component={Login} />
         <Route component={NotFound} />
       </Switch>
       <ResponsiveFooter />
