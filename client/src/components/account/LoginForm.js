@@ -28,6 +28,7 @@ export default class LoginForm extends Component {
       password: this.state.password,
     });
 
+    // Currently stopped to allow to check for successful login
     e.preventDefault();
     e.stopPropagation();
 

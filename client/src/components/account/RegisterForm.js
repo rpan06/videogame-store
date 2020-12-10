@@ -24,9 +24,8 @@ export default class RegisterForm extends Component {
       e.preventDefault();
       e.stopPropagation();
     }
-    // Checks to make sure the passwords match, and then checks to see that all of the forms have been filled out
-    // else if (password === confirmPassword && this.state.validated !== false) {
-    // Calls the api
+
+    // API call
     createAccount({
       firstName: this.state.firstName,
       lastName: this.state.lastName,
@@ -38,11 +37,6 @@ export default class RegisterForm extends Component {
     this.setState({
       validated: true,
     });
-
-    // const { password, confirmPassword } = this.state;
-    // if (password !== confirmPassword) {
-    //   alert("Passwords don't match");
-    // }
   };
 
   render() {
