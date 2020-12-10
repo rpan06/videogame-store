@@ -1,22 +1,20 @@
+/* eslint-disable */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Col, Row, Image, Button } from 'react-bootstrap';
-import LoadingSpinner from '../../shared/loading_spinner';
 import CalculatePrice from '../../../helper/calculatePrice';
-import shortenSummary from '../../../helper/shortenSummary';
+import ShortenSummary from '../../../helper/shortenSummary';
+import { addGameToShoppingCartAction } from '../../../actions';
 
-export default class Overview extends Component {
-  // eslint-disable-next-line class-methods-use-this
-  isEmpty(obj) {
-    return Object.keys(obj).length === 0;
+class Overview extends Component {
+  buyNowFunction(game, price, quantity = 1) {
+    this.props.addGameToShoppingCartAction({ game, price, quantity });
+    window.location.href = '/cart';
   }
 
   render() {
-    if (this.isEmpty(this.props.game)) {
-      return <LoadingSpinner />;
-    }
-
     const price = CalculatePrice(this.props.game.id);
-    const summary = shortenSummary(this.props.game.description_raw);
+    const summary = ShortenSummary(this.props.game.description_raw);
 
     return (
       <Row className="mb-4 d-flex overview">
@@ -29,7 +27,12 @@ export default class Overview extends Component {
         </Col>
         <Col xs={12} lg={2} className="text-right pb-5">
           <p>{`$${price}`}</p>
-          <Button variant="primary" size="lg" block>
+          <Button
+            variant="btn btn-yellow"
+            size="lg"
+            onClick={() => this.buyNowFunction(this.props.game, price, 1)}
+            block
+          >
             BUY NOW
           </Button>
         </Col>
@@ -37,3 +40,11 @@ export default class Overview extends Component {
     );
   }
 }
+
+function mapStateToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, {
+  addGameToShoppingCartAction,
+})(Overview);

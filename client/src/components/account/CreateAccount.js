@@ -11,12 +11,10 @@ export default class CreateAccount extends Component {
 
   render() {
     return (
-      <Container className="py-4" id="account-container">
+      <Container className="py-4 my-5" id="account-container">
         <Row>
           <Col className="account-box p-5" lg={{ span: 8, offset: 2 }}>
-            <h5 className="font-weight-light text-uppercase text-center">
-              SIGN UP
-            </h5>
+            <h5 className="text-uppercase text-center py-3">SIGN UP</h5>
             <RegisterForm />
           </Col>
         </Row>

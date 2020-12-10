@@ -27,7 +27,9 @@ export default class GameList extends Component {
       return <LoadingSpinner />;
     }
 
-    const galleryData = this.state.list.map((game) => <GameItem game={game} />);
+    const galleryData = this.state.list.map((game) => (
+      <GameItem game={game} key={game.id} />
+    ));
     return (
       <div className="py-5">
         <h4 className="font-weight-light text-uppercase pl-2">

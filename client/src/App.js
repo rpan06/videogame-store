@@ -7,6 +7,7 @@ import NavBar from './components/navbar/NavBar';
 import ResponsiveFooter from './components/footer/ResponsiveFooter';
 import BrowsePage from './components/browse/BrowsePage';
 import SearchResultPage from './components/search/SearchResultPage';
+import ShoppingCart from './components/shopping_cart/shopping_cart';
 import CreateAccount from './components/account/CreateAccount';
 import './App.css';
 import './scss/custom.scss';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/game/:id" component={IndividualPage} />
         <Route path="/browse/:category" component={BrowsePage} />
         <Route path="/search" component={SearchResultPage} />
+        <Route path="/cart" component={ShoppingCart} />
         <Route path="/register" component={CreateAccount} />
         <Route component={NotFound} />
       </Switch>

@@ -7,6 +7,7 @@
 
     h5 {
         font-size: 36px;
+        font-weight: 100;
     }
 
     .form-label, input {
@@ -21,5 +22,24 @@
 
     ::placeholder {
       color: transparent;
+    }
+
+    button {
+      background-color: $yellow;
+      border: none;
+      color: #000;
+
+      &:hover {
+        background-color: lighten($yellow, 5)
+      }
+    }
+
+    a.login-link {
+      font-size: 16px;
+
+      *:hover {
+        color: $primary-light;
+        text-decoration: none;
+      }
     }
 }
