@@ -63,7 +63,6 @@ export default (state = DEFAULT_STATE, action) => {
         'shoppingCart',
         JSON.stringify(filteredShoppingCart)
       );
-      console.log(filteredShoppingCart);
       return { ...state, shoppingCart: filteredShoppingCart };
     }
     default:
