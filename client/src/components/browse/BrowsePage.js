@@ -62,7 +62,7 @@ class BrowsePage extends Component {
     ));
 
     return (
-      <Container className="w-100 py-5" id="browse-container">
+      <Container className="w-100 py-5 mt-5" id="browse-container">
         <Row>
           <Col xs={{ order: 2 }} lg={{ span: 10, order: 1 }}>
             <div className="pb-2">
