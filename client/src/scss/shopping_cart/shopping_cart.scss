@@ -1,8 +1,9 @@
 @import '../custom';
 @import 'fontsource-roboto';
 
-.shopping-cart {
-  .container {
-    background-color: $lightgray;
-  }
+.sc-image {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
