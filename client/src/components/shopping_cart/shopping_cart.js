@@ -18,7 +18,7 @@ class ShoppingCart extends Component {
       return <ShoppingCartItem item={item} key={item.game.id} />;
     });
     return (
-      <div className="container py-5 d-flex flex-column align-items-center">
+      <div className="container mt-5 py-5 d-flex flex-column align-items-center">
         <h1 className="font-weight-extra-light pb-3">SHOPPING CART</h1>
         {shoppingListData}
         <div className="row w-100 d-flex flex-column align-items-end mt-3">

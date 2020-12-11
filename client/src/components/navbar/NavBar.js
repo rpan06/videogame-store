@@ -109,6 +109,7 @@ export default class NavBar extends Component {
           expand="lg"
           variant="dark"
           className="navbar-scss"
+          fixed="top"
         >
           <Navbar.Brand as={Link} to="/">
             <img src={logo} alt="logo" id="store-logo" />
