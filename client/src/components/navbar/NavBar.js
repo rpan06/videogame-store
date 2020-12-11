@@ -149,7 +149,7 @@ export default class NavBar extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link as={Link} to="/store" className="mx-1">
+              <Nav.Link as={Link} to="/" className="mx-1">
                 Store
               </Nav.Link>
               <NavbarDropdown genreList={this.state.genreList} />
