@@ -91,10 +91,23 @@ a {
   color: $yellow;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .font-weight-extra-light {
   font-weight: 100;
 }
 
 .w-20 {
   width: 40%;
+}
+
+.generic-msg-container {
+  height: 80vh;
+  display: flex;
+}
+.generic-msg-content {
+  margin: auto;
+  text-align: center;
 }
