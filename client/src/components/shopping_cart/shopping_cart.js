@@ -12,13 +12,22 @@ class ShoppingCart extends Component {
     if (this.props.shoppingCart.length === 0) {
       <div>There's nothing here!</div>;
     }
-    const shoppingListData = this.props.shoppingCart.map((item) => (
-      <ShoppingCartItem item={item} key={item.game.id} />
-    ));
+    let total = 0;
+    const shoppingListData = this.props.shoppingCart.map((item) => {
+      total += Number(item.price) * Number(item.quantity);
+      return <ShoppingCartItem item={item} key={item.game.id} />;
+    });
     return (
-      <div className="container py-5 d-flex justify-content-center">
+      <div className="container py-5 d-flex flex-column align-items-center">
         <h1 className="font-weight-extra-light pb-3">SHOPPING CART</h1>
         {shoppingListData}
+        <div className="row w-100 d-flex flex-column align-items-end mt-3">
+          <h4>
+            <span className="font-weight-light">Subtotal: </span>{' '}
+            <span>${total}</span>
+          </h4>
+          <button className="btn btn-yellow px-5 mt-5">CHECKOUT</button>
+        </div>
       </div>
     );
   }

@@ -53,15 +53,17 @@ export default (state = DEFAULT_STATE, action) => {
       return { ...state, shoppingCart: filteredShoppingCart };
     }
     case types.UPDATE_SHOPPING_CART: {
-      const filteredShoppingCart = state.shoppingCart.forEach((item) => {
+      const filteredShoppingCart = state.shoppingCart.map((item) => {
         if (item.game.id === action.payload.game.id) {
           item.quantity = action.payload.quantity;
         }
+        return item;
       });
       localStorage.setItem(
         'shoppingCart',
         JSON.stringify(filteredShoppingCart)
       );
+      console.log(filteredShoppingCart);
       return { ...state, shoppingCart: filteredShoppingCart };
     }
     default:
