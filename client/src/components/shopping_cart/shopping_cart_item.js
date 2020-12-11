@@ -9,10 +9,6 @@ import {
 import '../../scss/shopping_cart/shopping_cart.scss';
 
 class ShoppingCartItem extends Component {
-  componentDidMount() {
-    // console.log('item', this.props);
-  }
-
   delete() {
     this.props.removeGameFromShoppingCartAction(this.props.item);
   }
@@ -23,45 +19,50 @@ class ShoppingCartItem extends Component {
     this.props.updateShoppingCartAction(payload);
   }
 
-  // update() {
-  //   // get new quantity information and send through in payload
-  //   this.props.updateShoppingCartAction(this.props.item);
-  // }
-
   render() {
     if (!this.props.item) {
       return <LoadingSpinner />;
     }
     const { name, background_image: backgroundImage } = this.props.item.game;
-    const gameTotalPrice =
-      Number(this.props.item.price) * Number(this.props.item.quantity);
+    const gameTotalPrice = (
+      Number(this.props.item.price) * Number(this.props.item.quantity)
+    ).toFixed(2);
     return (
-      <div className="row w-100 p-4 bg-light-grey">
-        <div className="col-9 d-flex">
-          <img className="sc-image mr-4" src={backgroundImage} alt={name} />
-          <div className="d-flex flex-column align-items-center">
-            <h3 className="font-weight-extra-light">{name}</h3>
-            <div className="row d-flex align-items-baseline w-100">
-              <p onClick={this.delete.bind(this)}>Delete</p>
-              <span className="px-2">|</span>
-              <label htmlFor="quantity">Quantity</label>
-              <select
-                className="form-control form-control-sm col-3 mx-2"
-                id="quantity"
-                value={this.props.item.quantity}
-                onChange={this.handleChange.bind(this)}
-              >
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
-            </div>
+      <div className="row w-100 p-4 bg-light-grey m-0">
+        <img
+          className="col-4 col-md-3 sc-image"
+          src={backgroundImage}
+          alt={name}
+        />
+        <div className="col-8 col-md-6 pr-0 sc-text">
+          <h3 className="font-weight-extra-light">{name}</h3>
+          <div className="row d-flex align-items-baseline w-100 mx-0">
+            <p onClick={this.delete.bind(this)}>
+              <small className="cursor-pointer">Delete</small>
+            </p>
+            <span className="px-2">|</span>
+            <label htmlFor="quantity">
+              <small>Quantity</small>
+            </label>
+            <select
+              className="sc-quantity cursor-pointer mx-2"
+              id="quantity"
+              value={this.props.item.quantity}
+              onChange={this.handleChange.bind(this)}
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
           </div>
+          <h4 className="d-flex d-md-none font-weight-bold ">
+            ${gameTotalPrice}
+          </h4>
         </div>
-        <div className="col-3 d-flex justify-content-end">
-          <h5 className="font-weight-bold">${gameTotalPrice}</h5>
+        <div className="col-3 d-none d-md-flex justify-content-end">
+          <h4 className="font-weight-bold">${gameTotalPrice}</h4>
         </div>
       </div>
     );
