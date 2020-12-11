@@ -22,7 +22,7 @@ class IndividualPage extends Component {
     }
 
     return (
-      <div className="container py-5">
+      <div className="container py-5 mt-5">
         <IndividualPageBanner game={this.props.item} />
         <GameInfoPage game={this.props.item} />
         {this.props.item.metacritic_platforms && (
