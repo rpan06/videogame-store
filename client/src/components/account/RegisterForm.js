@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Form, Button, Col } from 'react-bootstrap';
 import { signUserUp } from '../../actions/user';
 
@@ -35,6 +35,9 @@ class RegisterForm extends Component {
 
     e.preventDefault();
     this.props.signUserUp(this.state);
+    this.props.history.replace({
+      pathname: '/',
+    });
 
     this.setState({
       validated: true,
@@ -146,4 +149,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(RegisterForm);
+export default connect(null, mapDispatchToProps)(withRouter(RegisterForm));
