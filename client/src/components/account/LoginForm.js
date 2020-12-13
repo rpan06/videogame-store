@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
 import { fetchUser } from '../../actions/user';
 
@@ -19,9 +19,9 @@ class LoginForm extends Component {
   handleOnChange = (e) => {
     e.persist();
     this.setState(() => ({
-        [e.target.name]: e.target.value 
+      [e.target.name]: e.target.value
     }))
-}
+  }
 
   handleSubmit = (e) => {
     // Checks the form to make sure that required fields have been added
@@ -31,14 +31,11 @@ class LoginForm extends Component {
       e.stopPropagation();
     }
 
-    // API call
-    // loginAccount({
-    //   email: this.state.email,
-    //   password: this.state.password,
-    // });
-
     e.preventDefault();
-    this.props.fetchUser(this.state)
+    this.props.fetchUser(this.state);
+    this.props.history.replace({
+      pathname: '/',
+    });
 
     this.setState({
       validated: true,
@@ -100,8 +97,8 @@ class LoginForm extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      fetchUser: (userInfo) => dispatch(fetchUser(userInfo))
+    fetchUser: (userInfo) => dispatch(fetchUser(userInfo))
   }
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(null, mapDispatchToProps)(withRouter(LoginForm));

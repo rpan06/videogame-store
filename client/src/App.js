@@ -21,10 +21,24 @@ class App extends Component {
     this.state = {};
   }
 
+  // Checks to see if the user has changed
+  componentDidUpdate(prevProps) {
+    if (this.props.userReducer.user !== prevProps.userReducer.user) {
+      console.log(
+        'user changed',
+        this.props.userReducer.user,
+        prevProps.userReducer.user
+      );
+    }
+  }
+
   render() {
     return (
       <Router>
-        <NavBar />
+        <NavBar
+          loggedIn={this.props.userReducer.loggedIn}
+          user={this.props.userReducer.user}
+        />
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/game/:id" component={IndividualPage} />
