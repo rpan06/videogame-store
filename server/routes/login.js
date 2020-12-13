@@ -61,7 +61,8 @@ router.post(
         (err, token) => {
           if (err) throw err;
           res.status(200).json({
-            token,
+              user,
+              token,
           });
         }
       );
@@ -75,7 +76,7 @@ router.post(
 );
 
 /**
- * @method - POST
+ * @method - GET
  * @description - Get LoggedIn User
  * @param - /user/me
  */
@@ -84,7 +85,12 @@ router.get('/me', auth, async (req, res) => {
   try {
     // request.user is getting fetched from Middleware after token authentication
     const user = await User.findById(req.user.id);
-    res.json(user);
+    const token = await req.headers.token;
+    const userObj = {
+      user,
+      token,
+    }
+    res.json(userObj);
   } catch (e) {
     res.send({ message: 'Error in Fetching user' });
   }

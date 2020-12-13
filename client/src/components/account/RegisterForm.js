@@ -1,9 +1,12 @@
+/* eslint-disable */
 import React, { Component } from 'react';
+// import { createAccount } from '../../actions/user';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Button, Col } from 'react-bootstrap';
-import { createAccount } from '../../actions/user';
+import { signUserUp } from '../../actions/user';
 
-export default class RegisterForm extends Component {
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
 
@@ -17,6 +20,13 @@ export default class RegisterForm extends Component {
     };
   }
 
+  handleOnChange = (e) => {
+    e.persist();
+    this.setState(() => ({
+        [e.target.name]: e.target.value 
+    }))
+}
+
   handleSubmit = (e) => {
     // Checks the form to make sure that required fields have been added
     const form = e.currentTarget;
@@ -26,13 +36,16 @@ export default class RegisterForm extends Component {
     }
 
     // API call
-    createAccount({
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword,
-    });
+    // createAccount({
+    //   firstName: this.state.firstName,
+    //   lastName: this.state.lastName,
+    //   email: this.state.email,
+    //   password: this.state.password,
+    //   confirmPassword: this.state.confirmPassword,
+    // });
+
+    e.preventDefault()
+    this.props.signUserUp(this.state)
 
     this.setState({
       validated: true,
@@ -52,10 +65,11 @@ export default class RegisterForm extends Component {
             <Form.Label>First Name</Form.Label>
             <Form.Control
               required
-              ype="firstName"
+              name="firstName"
+              type="firstName"
               placeholder="First name"
               value={this.state.firstName}
-              onChange={(e) => this.setState({ firstName: e.target.value })}
+              onChange={this.handleOnChange}
             />
             <Form.Control.Feedback type="invalid">
               Please enter your first name.
@@ -66,10 +80,11 @@ export default class RegisterForm extends Component {
             <Form.Label>Last Name</Form.Label>
             <Form.Control
               required
+              name="lastName"
               type="lastName"
               placeholder="Last name"
               value={this.state.lastName}
-              onChange={(e) => this.setState({ lastName: e.target.value })}
+              onChange={this.handleOnChange}
             />
             <Form.Control.Feedback type="invalid">
               Please enter your last name.
@@ -81,9 +96,10 @@ export default class RegisterForm extends Component {
           <Form.Label>Email</Form.Label>
           <Form.Control
             required
+            name="email"
             placeholder="Email address"
             value={this.state.email}
-            onChange={(e) => this.setState({ email: e.target.value })}
+            onChange={this.handleOnChange}
           />
           <Form.Control.Feedback type="invalid">
             Please enter your email.
@@ -94,10 +110,11 @@ export default class RegisterForm extends Component {
           <Form.Label>Password</Form.Label>
           <Form.Control
             required
+            name="password"
             placeholder="Password"
             type="password"
             value={this.state.password}
-            onChange={(e) => this.setState({ password: e.target.value })}
+            onChange={this.handleOnChange}
           />
           <Form.Text id="passwordHelpBlock" muted>
             Your password must be at least 6 characters long.
@@ -111,10 +128,11 @@ export default class RegisterForm extends Component {
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             required
+            name="confirmPassword"
             placeholder="Confirm password"
             type="password"
             value={this.state.confirmPassword}
-            onChange={(e) => this.setState({ confirmPassword: e.target.value })}
+            onChange={this.handleOnChange}
           />
           <Form.Control.Feedback type="invalid">
             Please confirm your password.
@@ -132,3 +150,11 @@ export default class RegisterForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      signUserUp: (userInfo) => dispatch(signUserUp(userInfo)),
+  }
+}
+
+export default connect(null, mapDispatchToProps)(RegisterForm);

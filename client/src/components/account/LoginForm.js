@@ -1,9 +1,11 @@
+/* eslint-disable */
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import { loginAccount } from '../../actions/user';
+import { fetchUser } from '../../actions/user';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
 
@@ -12,7 +14,16 @@ export default class LoginForm extends Component {
       password: '',
       validated: false,
     };
+
+    console.log(this.state.user);
   }
+
+  handleOnChange = (e) => {
+    e.persist();
+    this.setState(() => ({
+        [e.target.name]: e.target.value 
+    }))
+}
 
   handleSubmit = (e) => {
     // Checks the form to make sure that required fields have been added
@@ -23,14 +34,13 @@ export default class LoginForm extends Component {
     }
 
     // API call
-    loginAccount({
-      email: this.state.email,
-      password: this.state.password,
-    });
+    // loginAccount({
+    //   email: this.state.email,
+    //   password: this.state.password,
+    // });
 
-    // Currently stopped to allow to check for successful login
     e.preventDefault();
-    e.stopPropagation();
+    this.props.fetchUser(this.state)
 
     this.setState({
       validated: true,
@@ -49,9 +59,10 @@ export default class LoginForm extends Component {
           <Form.Label>Email</Form.Label>
           <Form.Control
             required
+            name="email"
             placeholder="Email"
             value={this.state.email}
-            onChange={(e) => this.setState({ email: e.target.value })}
+            onChange={this.handleOnChange}
           />
           <Form.Control.Feedback type="invalid">
             Please enter your email address.
@@ -62,17 +73,18 @@ export default class LoginForm extends Component {
           <Form.Label>Password</Form.Label>
           <Form.Control
             required
+            name="password"
             placeholder="Password"
             type="password"
             value={this.state.password}
-            onChange={(e) => this.setState({ password: e.target.value })}
+            onChange={this.handleOnChange}
           />
           <Form.Control.Feedback type="invalid">
             Please enter your password.
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Button variant="primary" type="submit" className="mt-5 mb-3" block>
+        <Button variant="primary" type="submit" value="Login" className="mt-5 mb-3" block>
           SUBMIT
         </Button>
 
@@ -87,3 +99,11 @@ export default class LoginForm extends Component {
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+      fetchUser: (userInfo) => dispatch(fetchUser(userInfo))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(LoginForm)
