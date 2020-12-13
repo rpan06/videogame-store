@@ -1,4 +1,6 @@
+/*eslint-disable*/
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import { getGenreListData } from '../../actions/rawg-api';
@@ -99,6 +101,7 @@ export default class NavBar extends Component {
         slug: res.slug,
       })),
     });
+    // console.log('props', this.props);
   }
 
   render() {

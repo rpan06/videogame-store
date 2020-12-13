@@ -14,8 +14,6 @@ class LoginForm extends Component {
       password: '',
       validated: false,
     };
-
-    console.log(this.state.user);
   }
 
   handleOnChange = (e) => {

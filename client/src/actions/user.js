@@ -72,7 +72,6 @@ export const fetchUser = (userInfo) => (dispatch) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      // console.log('user', data);
       localStorage.setItem('token', data.token);
       dispatch(setUser(data.user));
     });
@@ -94,7 +93,6 @@ export const signUserUp = (userInfo) => (dispatch) => {
     });
 };
 
-/* eslint-disable */
 // export const autoLogin = () => (dispatch) => {
 //   fetch(`http://localhost:4000/auto_login`, {
 //     headers: {
@@ -103,11 +101,9 @@ export const signUserUp = (userInfo) => (dispatch) => {
 //       Authorization: `Bearer ${localStorage.getItem('token')}`,
 //     },
 //   })
-    // .then((res) => res.json())
-    // .then((res) => res.text())
-    // .then((text) => console.log(text))
-    // .then((data) => {
-    //   localStorage.setItem('token', data.token);
-    //   dispatch(setUser(data.user));
-    // });
+//     .then((res) => res.json())
+//     .then((data) => {
+//       localStorage.setItem('token', data.token);
+//       dispatch(setUser(data.user));
+//     });
 // };

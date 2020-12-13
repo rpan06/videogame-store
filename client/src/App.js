@@ -11,18 +11,16 @@ import SearchResultPage from './components/search/SearchResultPage';
 import ShoppingCart from './components/shopping_cart/shopping_cart';
 import CreateAccount from './components/account/CreateAccount';
 import Login from './components/account/Login';
-// import { autoLogin } from './actions/user';
 import './App.css';
 import './scss/custom.scss';
 
+/* eslint-disable dot-notation, react/no-did-update-set-state */
 class App extends Component {
-  componentDidMount() {
-    if (this.props.userReducer.loggedIn) {
-      console.log(`Welcome, ${this.props.userReducer.user.username}`);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
-  /* eslint-disable */
   render() {
     return (
       <Router>
@@ -49,11 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     autoLogin: () => dispatch(autoLogin()),
-//   };
-// };
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
 export default connect(mapStateToProps)(App);
