@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -78,28 +77,6 @@ class NavBar extends Component {
     );
   }
 
-  // userLogout = () => {
-  //   console.log('logging out user');
-  // }
-
-  handleLoginLogout = () => {
-    console.log(this.props);
-    if (this.props.loggedIn) {
-      this.props.logUserOut();
-    } else {
-      this.props.history.replace({
-        pathname: '/login',
-      });
-    }
-  }
-
-  // Checks to see if the user props have updated
-  componentDidUpdate(prevProps) {
-    if (this.props.user !== prevProps.user) {
-      console.log('in navbar, user changed', this.props.user, prevProps.user);
-    }
-  }
-
   async componentDidMount() {
     const genreResponse = await getGenreListData();
     this.setState({
@@ -110,6 +87,16 @@ class NavBar extends Component {
       })),
     });
   }
+
+  handleLoginLogout = () => {
+    if (this.props.loggedIn) {
+      this.props.logUserOut();
+    } else {
+      this.props.history.replace({
+        pathname: '/login',
+      });
+    }
+  };
 
   render() {
     return (
@@ -132,30 +119,6 @@ class NavBar extends Component {
           >
             Game Nation
           </Navbar.Brand>
-          <Navbar.Brand
-            as={Link}
-            to="/register"
-            alt="account icon"
-            className="d-block d-md-none"
-          >
-            {this.accountIcon}
-          </Navbar.Brand>
-          {/* <Navbar.Brand
-            as={Link}
-            to="/wishlist"
-            alt="favorites icon"
-            className="d-block d-md-none"
-          >
-            {this.favoritesIcon}
-          </Navbar.Brand> */}
-          <Navbar.Brand
-            as={Link}
-            to="/cart"
-            alt="cart icon"
-            className="d-block d-md-none"
-          >
-            {this.cartIcon}
-          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
@@ -168,23 +131,13 @@ class NavBar extends Component {
               </Nav.Link>
             </Nav>
             <Searchbar />
-            {/* <Navbar.Brand
-              as={Link}
-              to="/register"
-              alt="account icon"
-              className="d-none d-lg-block ml-4"
+            <Button
+              id="login-logout-btn"
+              variant="outline-warning"
+              onClick={this.handleLoginLogout}
             >
-              {this.accountIcon}
-            </Navbar.Brand> */}
-            {/* <Navbar.Brand
-              as={Link}
-              to="/cart"
-              alt="cart icon"
-              className="d-none d-lg-block ml-1"
-            >
-              {this.cartIcon}
-            </Navbar.Brand> */}
-            <Button id="login-logout-btn" variant="outline-warning" onClick={this.handleLoginLogout}>{this.props.loggedIn ? 'Logout' : 'Login'}</Button>{' '}
+              {this.props.loggedIn ? 'Logout' : 'Login'}
+            </Button>{' '}
           </Navbar.Collapse>
         </Navbar>
       </>
@@ -192,12 +145,10 @@ class NavBar extends Component {
   }
 }
 
-// export default withRouter(NavBar);
-
 const mapDispatchToProps = (dispatch) => {
   return {
-    logUserOut: () => dispatch(logUserOut())
-  }
-}
+    logUserOut: () => dispatch(logUserOut()),
+  };
+};
 
 export default connect(null, mapDispatchToProps)(withRouter(NavBar));

@@ -14,22 +14,10 @@ import Login from './components/account/Login';
 import './App.css';
 import './scss/custom.scss';
 
-/* eslint-disable dot-notation, react/no-did-update-set-state */
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-
-  // Checks to see if the user has changed
-  componentDidUpdate(prevProps) {
-    if (this.props.userReducer.user !== prevProps.userReducer.user) {
-      console.log(
-        'user changed',
-        this.props.userReducer.user,
-        prevProps.userReducer.user
-      );
-    }
   }
 
   render() {

@@ -44,7 +44,7 @@
 
 #store-name {
     font-size: 18px;
-    font-weight: 100!important;
+    font-weight: 100 !important;
     text-transform: uppercase;
 
     &:hover {
@@ -59,6 +59,7 @@
     border: none;
 }
 
+
 #searchbar-icon {
     background-color: $darkgray;
     border: none;
@@ -67,4 +68,11 @@
 button#login-logout-btn {
     height: calc(1.5em + 0.75rem + 2px);
     font-size: 16px;
+
+    @media only screen and(max-width: 994px) {
+        & {
+            margin: 15px 0;
+            width: 100%;
+        }
+    }
 }

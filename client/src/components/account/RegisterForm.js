@@ -1,6 +1,4 @@
-/* eslint-disable */
 import React, { Component } from 'react';
-// import { createAccount } from '../../actions/user';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Button, Col } from 'react-bootstrap';
@@ -23,9 +21,9 @@ class RegisterForm extends Component {
   handleOnChange = (e) => {
     e.persist();
     this.setState(() => ({
-        [e.target.name]: e.target.value 
-    }))
-}
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   handleSubmit = (e) => {
     // Checks the form to make sure that required fields have been added
@@ -35,17 +33,8 @@ class RegisterForm extends Component {
       e.stopPropagation();
     }
 
-    // API call
-    // createAccount({
-    //   firstName: this.state.firstName,
-    //   lastName: this.state.lastName,
-    //   email: this.state.email,
-    //   password: this.state.password,
-    //   confirmPassword: this.state.confirmPassword,
-    // });
-
-    e.preventDefault()
-    this.props.signUserUp(this.state)
+    e.preventDefault();
+    this.props.signUserUp(this.state);
 
     this.setState({
       validated: true,
@@ -153,8 +142,8 @@ class RegisterForm extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      signUserUp: (userInfo) => dispatch(signUserUp(userInfo)),
-  }
-}
+    signUserUp: (userInfo) => dispatch(signUserUp(userInfo)),
+  };
+};
 
 export default connect(null, mapDispatchToProps)(RegisterForm);
