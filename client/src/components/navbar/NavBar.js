@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Navbar, Nav } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
+import { Navbar, Nav, Button } from 'react-bootstrap';
 import { getGenreListData } from '../../actions/rawg-api';
+import { logUserOut } from '../../actions/user';
 import NavbarDropdown from './NavbarDropdown';
 import Searchbar from '../search/Searchbar';
 
@@ -9,7 +11,7 @@ import logo from '../../assets/logo.svg';
 
 import '../../scss/navbar.scss';
 
-export default class NavBar extends Component {
+class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,21 +40,6 @@ export default class NavBar extends Component {
       </svg>
     );
 
-    this.favoritesIcon = (
-      <svg
-        width="20"
-        height="18"
-        viewBox="0 0 20 18"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M19.5032 3.70781C19.1878 2.8077 18.6338 1.99599 17.901 1.35985C17.1676 0.723318 16.2854 0.289206 15.35 0.104744C14.9974 0.0353183 14.6349 0 14.2727 0C13.2157 0 12.1877 0.298893 11.2999 0.864389C10.7655 1.20486 10.296 1.6317 9.90915 2.12535C9.52246 1.63251 9.05344 1.20647 8.51942 0.866811C7.63203 0.302122 6.60477 0.00363273 5.54865 0.00363273C4.66872 0.00363273 3.78536 0.220991 2.99464 0.632096C2.20452 1.043 1.51935 1.64079 1.01298 2.36087C0.494511 3.09872 0.178665 3.92497 0.0741227 4.8164C-0.0173011 5.59724 0.0533354 6.43539 0.284216 7.30765C0.741537 9.03542 1.75346 10.6116 2.52198 11.6294C4.19284 13.8425 6.49054 15.8514 9.54587 17.7707L9.91076 18L10.2759 17.7707C14.0341 15.4099 16.6574 12.9172 18.2953 10.1505C19.2374 8.55933 19.728 7.14176 19.7956 5.81682C19.8332 5.07836 19.7349 4.36877 19.5032 3.70781ZM9.91076 16.3766C7.18116 14.6187 5.11959 12.7925 3.61705 10.8025C2.92259 9.88286 2.01098 8.46912 1.61077 6.95669C1.42409 6.25153 1.36576 5.58533 1.43721 4.97624C1.51491 4.31387 1.74982 3.69954 2.1359 3.15039C2.51613 2.60951 3.03218 2.15986 3.62795 1.84987C4.22392 1.53988 4.8881 1.3762 5.54886 1.3762C6.34362 1.3762 7.11598 1.60042 7.78279 2.02485C8.43264 2.43837 8.95515 3.02183 9.2938 3.71205L9.91056 4.96918L10.5261 3.71144C10.8644 3.02042 11.3869 2.43635 12.0371 2.02222C12.7043 1.59699 13.4773 1.37237 14.2727 1.37237C14.5459 1.37237 14.819 1.3988 15.0844 1.45108C15.7855 1.58932 16.4485 1.91607 17.0015 2.39619C17.5542 2.87592 17.9714 3.48642 18.2081 4.1617C18.3807 4.65374 18.4535 5.18714 18.4251 5.74678C18.3692 6.84427 17.9403 8.05599 17.1145 9.45117C15.6428 11.9368 13.284 14.2052 9.91076 16.3766Z"
-          fill="white"
-        />
-      </svg>
-    );
-
     this.cartIcon = (
       <svg
         width="23"
@@ -61,7 +48,7 @@ export default class NavBar extends Component {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* do not change to clipPatch, needs to have the - to display properly */}
+        {/* do not change to clipPath, needs to have the - to display properly */}
         <g clipPath="url(#clip0)">
           <path
             d="M1.44632 1.28571H4.2149C4.31604 1.65 7.16432 11.9031 7.29847 12.3866C7.37561 12.6647 7.6289 12.8571 7.91775 12.8571H19.4892C19.775 12.8571 20.0266 12.6681 20.1063 12.3934L22.7206 3.39343C22.7772 3.19929 22.7386 2.98971 22.6173 2.82814C22.496 2.66657 22.3058 2.57143 22.1035 2.57143H5.90647L5.32318 0.471C5.24561 0.192429 4.99232 0 4.70347 0H1.44632C1.09147 0 0.803467 0.288 0.803467 0.642857C0.803467 0.997714 1.09147 1.28571 1.44632 1.28571ZM21.2472 3.85714L19.0062 11.5714H8.40632L6.26347 3.85714H21.2472Z"
@@ -101,6 +88,16 @@ export default class NavBar extends Component {
     });
   }
 
+  handleLoginLogout = () => {
+    if (this.props.loggedIn) {
+      this.props.logUserOut();
+    } else {
+      this.props.history.replace({
+        pathname: '/login',
+      });
+    }
+  };
+
   render() {
     return (
       <>
@@ -122,30 +119,6 @@ export default class NavBar extends Component {
           >
             Game Nation
           </Navbar.Brand>
-          <Navbar.Brand
-            as={Link}
-            to="/register"
-            alt="account icon"
-            className="d-block d-md-none"
-          >
-            {this.accountIcon}
-          </Navbar.Brand>
-          <Navbar.Brand
-            as={Link}
-            to="/wishlist"
-            alt="favorites icon"
-            className="d-block d-md-none"
-          >
-            {this.favoritesIcon}
-          </Navbar.Brand>
-          <Navbar.Brand
-            as={Link}
-            to="/cart"
-            alt="cart icon"
-            className="d-block d-md-none"
-          >
-            {this.cartIcon}
-          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
@@ -153,35 +126,29 @@ export default class NavBar extends Component {
                 Store
               </Nav.Link>
               <NavbarDropdown genreList={this.state.genreList} />
+              <Nav.Link as={Link} to="/cart" className="mx-1">
+                Cart
+              </Nav.Link>
             </Nav>
             <Searchbar />
-            <Navbar.Brand
-              as={Link}
-              to="/register"
-              alt="account icon"
-              className="d-none d-lg-block ml-4"
+            <Button
+              id="login-logout-btn"
+              variant="outline-warning"
+              onClick={this.handleLoginLogout}
             >
-              {this.accountIcon}
-            </Navbar.Brand>
-            <Navbar.Brand
-              as={Link}
-              to="/wishlist"
-              alt="favorites icon"
-              className="d-none d-lg-block ml-2"
-            >
-              {this.favoritesIcon}
-            </Navbar.Brand>
-            <Navbar.Brand
-              as={Link}
-              to="/cart"
-              alt="cart icon"
-              className="d-none d-lg-block ml-1"
-            >
-              {this.cartIcon}
-            </Navbar.Brand>
+              {this.props.loggedIn ? 'Logout' : 'Login'}
+            </Button>{' '}
           </Navbar.Collapse>
         </Navbar>
       </>
     );
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logUserOut: () => dispatch(logUserOut()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(withRouter(NavBar));

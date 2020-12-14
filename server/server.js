@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const login = require('./routes/login');
 const signup = require('./routes/signup');
+const auth = require('./middleware/auth');
 const InitiateMongoServer = require('./config/mongo_db');
 
 // Initiate Mongo Server
@@ -19,6 +20,10 @@ app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.json({ message: 'API Working' });
+});
+
+app.get('/checkToken', auth, function(req, res) {
+  res.sendStatus(200);
 });
 
 /**

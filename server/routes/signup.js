@@ -18,14 +18,14 @@ router.post(
     check('lastName', 'Please enter a last name.').not().isEmpty(),
     check('email', 'Please enter a valid email.').isEmail(),
     check('password', 'Password must be at least 6 characters.')
-    .isLength({min: 6})
-    .custom((value,{req, loc, path}) => {
-            if (value !== req.body.confirmPassword) {
-                throw new Error('Passwords are not matching.');
-            } else {
-                return value;
-            }
-        })
+      .isLength({ min: 6 })
+      .custom((value, { req, loc, path }) => {
+        if (value !== req.body.confirmPassword) {
+          throw new Error('Passwords are not matching.');
+        } else {
+          return value;
+        }
+      })
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -56,7 +56,11 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
 
-      await user.save();
+      await user.save(function(err, doc) {
+        if(err) {
+          return console.error(err);
+        }
+      });
 
       const payload = {
         user: {
@@ -73,6 +77,7 @@ router.post(
         (err, token) => {
           if (err) throw err;
           res.status(200).json({
+            user,
             token,
           });
         }

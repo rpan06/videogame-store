@@ -1,36 +1,39 @@
-/* eslint-disable prefer-const, no-shadow */
-import axios from 'axios';
+// Action Creators
 
-export async function createAccount(payload) {
-  let response = {
-    success: null,
-    error: null,
-  };
+const setUser = (payload) => ({ type: 'SET_USER', payload });
 
-  await axios
-    .post('http://localhost:4000/user/signup/', payload)
-    .then((response) => {
-      response.success = response;
-    })
-    .catch((error) => {
-      response.error = error;
+export const logUserOut = () => ({ type: 'LOG_OUT' });
+
+// Methods
+
+export const fetchUser = (userInfo) => (dispatch) => {
+  fetch(`http://localhost:4000/user/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(userInfo),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      localStorage.setItem('token', data.token);
+      dispatch(setUser(data.user));
     });
-  return response;
-}
+};
 
-export async function loginAccount(payload) {
-  let response = {
-    success: null,
-    error: null,
-  };
-
-  await axios
-    .post('http://localhost:4000/user/login/', payload)
-    .then((response) => {
-      response.success = response;
-    })
-    .catch((error) => {
-      response.error = error;
+export const signUserUp = (userInfo) => (dispatch) => {
+  fetch(`http://localhost:4000/user/signup`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(userInfo),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      localStorage.setItem('token', data.token);
+      dispatch(setUser(data.user));
     });
-  return response;
-}
+};
