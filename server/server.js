@@ -18,7 +18,13 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../client/public')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
+
+app.use((req, res, next) => {
+  res.sendFile(
+    path.resolve(__dirname, '..', 'client', 'client', 'public', 'index.html')
+  );
+});
 
 app.get('/', (req, res) => {
   res.json({ message: 'API Working' });
