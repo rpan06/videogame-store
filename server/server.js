@@ -5,6 +5,7 @@ const login = require('./routes/login');
 const signup = require('./routes/signup');
 const auth = require('./middleware/auth');
 const InitiateMongoServer = require('./config/mongo_db');
+const path = require('path');
 
 // Initiate Mongo Server
 InitiateMongoServer();
@@ -17,12 +18,13 @@ const PORT = process.env.PORT || 4000;
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, '../client/public')));
 
 app.get('/', (req, res) => {
   res.json({ message: 'API Working' });
 });
 
-app.get('/checkToken', auth, function(req, res) {
+app.get('/checkToken', auth, function (req, res) {
   res.sendStatus(200);
 });
 
