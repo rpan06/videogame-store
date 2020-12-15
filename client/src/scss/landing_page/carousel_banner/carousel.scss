@@ -1,0 +1,31 @@
+@import '../../custom';
+@import 'fontsource-roboto';
+
+// Override Bootstrap carousel defaults
+
+.carousel-indicators.landing-page {
+  li {
+    background-color: $yellow !important;
+  }
+}
+
+.carousel-control-prev.landing-page,
+.carousel-control-next.landing-page {
+  top: 93% !important;
+}
+
+@media (min-width: 960px) {
+  .carousel-indicators.landing-page {
+    left: 58%;
+  }
+
+  .carousel-control-prev.landing-page,
+  .carousel-indicators.landing-page {
+    left: 58% !important;
+  }
+
+  .carousel-control-prev.landing-page,
+  .carousel-control-next.landing-page {
+    top: 86% !important;
+  }
+}

@@ -1,0 +1,113 @@
+// Bootstrap variable overrides
+$body-bg: #020202;
+$body-color: #e7e7e7;
+$font-family-sans-serif: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+// Variables
+$primary-light: rgba($body-color, 0.6);
+$yellow: #e4bd00;
+$darkgray: #1c1c1c;
+$lightgray: #333333;
+
+// Bootstrap and its default variables
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+// Fonts
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto/Roboto-Thin.ttf');
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto/Roboto-Light.ttf');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto/Roboto-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto/Roboto-Medium.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto/Roboto-Bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('../assets/fonts/Roboto/Roboto-Black.ttf');
+  font-weight: 900;
+}
+
+// Sitewide styles
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $yellow;
+}
+
+::-webkit-scrollbar-track {
+  background: #eee;
+}
+
+::-webkit-scrollbar-button {
+  background: $yellow;
+  height: 15px;
+  border-radius: 50%;
+}
+
+a {
+  color: white;
+  &:hover {
+    color: $yellow;
+  }
+}
+
+.bg-light-grey {
+  background-color: $lightgray;
+}
+
+.btn-yellow {
+  background-color: $yellow;
+  border-color: $yellow;
+  color: black;
+}
+
+.color-yellow {
+  color: $yellow;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.font-weight-extra-light {
+  font-weight: 100;
+}
+
+.w-20 {
+  width: 40%;
+}
+
+.generic-msg-container {
+  height: 80vh;
+  display: flex;
+}
+.generic-msg-content {
+  margin: auto;
+  text-align: center;
+}

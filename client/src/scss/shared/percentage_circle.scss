@@ -1,0 +1,41 @@
+@import '../custom.scss';
+
+.single-chart {
+  width: 100%;
+}
+
+.circular-chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 80%;
+  max-height: 250px;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: $lightgray;
+  stroke-width: 4.5;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 4;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.yellow .circle {
+  stroke: $yellow;
+}
+
+.percentage {
+  fill: white;
+  font-size: 0.4em;
+  text-anchor: middle;
+}

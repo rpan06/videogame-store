@@ -1,0 +1,12 @@
+@import '../../custom';
+@import 'fontsource-roboto';
+
+.slider-container {
+  margin: auto;
+  overflow-x: scroll;
+  padding-bottom: 10px;
+}
+
+.photos-container {
+  white-space: nowrap;
+}

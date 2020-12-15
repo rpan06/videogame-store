@@ -1,0 +1,83 @@
+@import 'custom';
+@import 'fontsource-roboto';
+
+footer {
+  font-size: 15px;
+  color: $body-color;
+  border-top: 1px solid $lightgray;
+
+  .footer-title {
+    color: $yellow;
+    font-weight: 700;
+    font-size: 17px;
+  }
+
+  .footer-link {
+    color: $body-color;
+
+    &:hover {
+      color: $primary-light;
+      text-decoration: none;
+    }
+  }
+
+  button {
+    border: 2px solid $yellow;
+    background-color: $body-bg;
+    color: $body-color;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: $yellow;
+    }
+  }
+
+  .copyright {
+    color: $primary-light;
+
+    @media only screen and (max-width: 965px) {
+      & {
+        padding-top: 20px;
+      }
+    }
+  }
+
+  .border-b-gray {
+    border-bottom: 1px solid $lightgray;
+    width: 100vw;
+  }
+
+  .footer-dropdown-button {
+    & .btn {
+      background-color: $body-bg;
+      width: 100vw;
+      text-align: left;
+      color: $yellow;
+      font-size: 17px;
+      font-weight: 700;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    & .dropdown-menu {
+      background-color: $body-bg;
+      width: 100vw;
+
+      & .dropdown-item {
+        color: $body-color;
+        font-size: 15px;
+        padding: 0.75rem 1.5rem;
+
+        &:hover {
+          background-color: $yellow;
+          color: $darkgray;
+        }
+      }
+    }
+  }
+}
