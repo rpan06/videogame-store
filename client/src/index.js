@@ -5,14 +5,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 // eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
-// import reduxPromise from 'redux-promise';
+import reduxPromise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers/index';
 
 import App from './App';
 import 'fontsource-roboto';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk, reduxPromise));
 
 ReactDOM.render(
   <Provider store={store}>
