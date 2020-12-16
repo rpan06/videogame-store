@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { getGenreListData } from '../../actions/rawg-api';
-import { logUserOut } from '../../actions/user';
+import { logOutAction } from '../../actions';
 import NavbarDropdown from './NavbarDropdown';
 import Searchbar from '../search/Searchbar';
 
@@ -136,7 +136,7 @@ class NavBar extends Component {
               variant="outline-warning"
               onClick={this.handleLoginLogout}
             >
-              {this.props.loggedIn ? 'Logout' : 'Login'}
+              {this.props.user ? 'Logout' : 'Login'}
             </Button>{' '}
           </Navbar.Collapse>
         </Navbar>
@@ -145,10 +145,10 @@ class NavBar extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapStateToProps(state) {
   return {
-    logUserOut: () => dispatch(logUserOut()),
+    user: state.redux.user,
   };
-};
+}
 
-export default connect(null, mapDispatchToProps)(withRouter(NavBar));
+export default connect(mapStateToProps, { logOutAction })(NavBar);

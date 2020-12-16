@@ -1,18 +1,17 @@
-// import axios from 'axios';
 import types from './types';
-// import config from '../config';
 import {
   getGameListData,
   getSingleGameData,
   getGenreListData,
 } from './rawg-api';
+import { createAccount, loginAccount } from './user';
 
 export async function getGameListAction(
   queryCategory = null,
   queryItem = null,
   querySort = null
 ) {
-  const response = getGameListData(queryCategory, queryItem, querySort);
+  const response = await getGameListData(queryCategory, queryItem, querySort);
 
   return {
     type: types.GET_GAME_LIST,
@@ -21,7 +20,7 @@ export async function getGameListAction(
 }
 
 export async function getGenreListAction() {
-  const response = getGenreListData();
+  const response = await getGenreListData();
 
   return {
     type: types.GET_GENRE_LIST,
@@ -30,7 +29,7 @@ export async function getGenreListAction() {
 }
 
 export async function getSingleGameAction(id) {
-  const response = getSingleGameData(id);
+  const response = await getSingleGameData(id);
 
   return {
     type: types.GET_SINGLE_GAME,
@@ -51,7 +50,6 @@ export function clearGameListAction() {
 }
 
 export function addGameToShoppingCartAction(payload) {
-  // localStorage.setItem('itinerary', resp.data.token)
   return {
     type: types.ADD_GAME_TO_SHOPPING_CART,
     payload,
@@ -59,7 +57,6 @@ export function addGameToShoppingCartAction(payload) {
 }
 
 export function removeGameFromShoppingCartAction(payload) {
-  // localStorage.removeItem('token')
   return {
     type: types.REMOVE_GAME_FROM_SHOPPING_CART,
     payload,
@@ -70,5 +67,29 @@ export function updateShoppingCartAction(payload) {
   return {
     type: types.UPDATE_SHOPPING_CART,
     payload,
+  };
+}
+
+export async function registerAction(payload) {
+  const response = await createAccount(payload);
+
+  return {
+    type: types.SET_USER,
+    payload: response,
+  };
+}
+
+export async function logInAction(payload) {
+  const response = await loginAccount(payload);
+
+  return {
+    type: types.SET_USER,
+    payload: response,
+  };
+}
+
+export async function logOutAction() {
+  return {
+    type: types.LOG_OUT,
   };
 }

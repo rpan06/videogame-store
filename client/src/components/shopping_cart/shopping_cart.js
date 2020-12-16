@@ -81,7 +81,7 @@ class ShoppingCart extends Component {
 
 function mapStateToProps(state) {
   return {
-    shoppingCart: state.list.shoppingCart,
+    shoppingCart: state.redux.shoppingCart,
   };
 }
 

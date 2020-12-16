@@ -23,10 +23,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <NavBar
-          loggedIn={this.props.userReducer.loggedIn}
-          user={this.props.userReducer.user}
-        />
+        <NavBar user={this.props.user} />
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route path="/game/:id" component={IndividualPage} />
@@ -45,7 +42,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    userReducer: state.userReducer,
+    user: state.redux.user,
   };
 };
 

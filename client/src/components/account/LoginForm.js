@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import { fetchUser } from '../../actions/user';
+import { logInAction } from '../../actions';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class LoginForm extends Component {
     }
 
     e.preventDefault();
-    this.props.fetchUser(this.state);
+    this.props.logInAction(this.state);
     // this.props.history.replace({
     //   pathname: '/',
     // });
@@ -92,7 +92,6 @@ class LoginForm extends Component {
           to="/register"
           className="login-link d-flex justify-content-center"
         >
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
           Don't have an account? SIGN UP
         </Link>
       </Form>
@@ -100,10 +99,10 @@ class LoginForm extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapStateToProps(state) {
   return {
-    fetchUser: (userInfo) => dispatch(fetchUser(userInfo)),
+    user: state.redux.user,
   };
-};
+}
 
-export default connect(null, mapDispatchToProps)(withRouter(LoginForm));
+export default connect(mapStateToProps, { logInAction })(LoginForm);

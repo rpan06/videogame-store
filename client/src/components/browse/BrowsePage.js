@@ -98,7 +98,7 @@ class BrowsePage extends Component {
 
 function mapStateToProps(state) {
   return {
-    item: state.list.single,
+    item: state.redux.single,
   };
 }
 

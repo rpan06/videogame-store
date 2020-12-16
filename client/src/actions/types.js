@@ -7,4 +7,6 @@ export default {
   ADD_GAME_TO_SHOPPING_CART: 'add_game_to_shopping_cart',
   REMOVE_GAME_FROM_SHOPPING_CART: 'remove_game_from_shopping_cart',
   UPDATE_SHOPPING_CART: 'update_shopping_cart',
+  SET_USER: 'set_user',
+  LOG_OUT: 'log_out',
 };
