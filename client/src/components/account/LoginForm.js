@@ -32,9 +32,9 @@ class LoginForm extends Component {
 
     e.preventDefault();
     this.props.fetchUser(this.state);
-    this.props.history.replace({
-      pathname: '/',
-    });
+    // this.props.history.replace({
+    //   pathname: '/',
+    // });
 
     this.setState({
       validated: true,
