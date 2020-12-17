@@ -81,7 +81,6 @@ export async function registerAction(payload) {
 
 export async function logInAction(payload) {
   const response = await loginAccount(payload);
-
   return {
     type: types.SET_USER,
     payload: response,

@@ -9,6 +9,13 @@ export default class CreateAccount extends Component {
     this.state = {};
   }
 
+  componentDidMount() {
+    // Redirects user to homepage if logged in.
+    if (localStorage.getItem('token')) {
+      window.location.href = '/';
+    }
+  }
+
   render() {
     return (
       <div className="pt-4">

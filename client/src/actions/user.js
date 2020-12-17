@@ -8,10 +8,10 @@ export async function createAccount(payload) {
   await axios
     .post('http://localhost:4000/api/user/signup/', payload)
     .then((res) => {
-      response.success = res;
+      response.success = res.data;
     })
     .catch((error) => {
-      response.error = error;
+      response.error = error.response.data.errors;
     });
   return response;
 }
@@ -24,10 +24,10 @@ export async function loginAccount(payload) {
   await axios
     .post('http://localhost:4000/api/user/login/', payload)
     .then((res) => {
-      response.success = res;
+      response.success = res.data;
     })
     .catch((error) => {
-      response.error = error;
+      response.error = error.response.data.errors;
     });
   return response;
 }

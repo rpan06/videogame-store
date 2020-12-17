@@ -25,7 +25,6 @@ function addGameToShoppingCart(payload, shoppingCart) {
 const DEFAULT_STATE = {
   list: [],
   single: {},
-  user: null,
   shoppingCart: checkLocalStorage(),
 };
 
@@ -67,11 +66,16 @@ export default (state = DEFAULT_STATE, action) => {
       return { ...state, shoppingCart: filteredShoppingCart };
     }
     case types.SET_USER:
-      localStorage.setItem('token', JSON.stringify(action.payload.token));
-      return { ...state, user: action.payload.user };
+      if (action.payload.success) {
+        localStorage.setItem(
+          'token',
+          JSON.stringify(action.payload.success.token)
+        );
+      }
+      return state;
     case types.LOG_OUT:
       localStorage.clear('token');
-      return { ...state, user: null };
+      return state;
     default:
       return state;
   }

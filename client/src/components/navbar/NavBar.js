@@ -16,6 +16,8 @@ class NavBar extends Component {
     super(props);
     this.state = {
       genreList: [],
+      isLoggedIn: false,
+      busy: false,
     };
 
     this.accountIcon = (
@@ -78,6 +80,11 @@ class NavBar extends Component {
   }
 
   async componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.setState({
+        isLoggedIn: true,
+      });
+    }
     const genreResponse = await getGenreListData();
     this.setState({
       genreList: genreResponse.map((res) => ({
@@ -89,13 +96,20 @@ class NavBar extends Component {
   }
 
   handleLoginLogout = () => {
-    if (this.props.loggedIn) {
-      this.props.logUserOut();
+    this.setState({
+      busy: true,
+    });
+    if (this.state.isLoggedIn) {
+      this.props.logOutAction();
     } else {
-      this.props.history.replace({
-        pathname: '/login',
-      });
+      window.location.href = '/login';
     }
+    // setTimeout is to give more loading feedback to user so actions aren't instantaneous
+    setTimeout(() => {
+      this.setState({
+        busy: false,
+      });
+    }, 500);
   };
 
   render() {
@@ -131,13 +145,21 @@ class NavBar extends Component {
               </Nav.Link>
             </Nav>
             <Searchbar />
-            <Button
-              id="login-logout-btn"
-              variant="outline-warning"
-              onClick={this.handleLoginLogout}
-            >
-              {this.props.user ? 'Logout' : 'Login'}
-            </Button>{' '}
+            {this.state.busy ? (
+              <Button disabled id="login-logout-btn" variant="outline-warning">
+                <div className="spinner-border spinner-border-sm" role="status">
+                  <span className="sr-only">Loading...</span>
+                </div>
+              </Button>
+            ) : (
+              <Button
+                id="login-logout-btn"
+                variant="outline-warning"
+                onClick={this.handleLoginLogout}
+              >
+                {this.state.isLoggedIn ? 'Logout' : 'Login'}
+              </Button>
+            )}
           </Navbar.Collapse>
         </Navbar>
       </>
@@ -147,7 +169,7 @@ class NavBar extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.redux.user,
+    redux: state.redux,
   };
 }
 

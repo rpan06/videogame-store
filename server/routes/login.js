@@ -37,13 +37,23 @@ router.post(
       });
       if (!user)
         return res.status(400).json({
-          message: 'User Not Exist',
+          errors: [
+            {
+              param: 'email',
+              msg: 'This email is not in use.',
+            },
+          ],
         });
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
         return res.status(400).json({
-          message: 'Incorrect Password',
+          errors: [
+            {
+              param: 'password',
+              msg: 'Password is incorrect',
+            },
+          ],
         });
 
       const payload = {
