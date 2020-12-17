@@ -101,15 +101,10 @@ class NavBar extends Component {
     });
     if (this.state.isLoggedIn) {
       this.props.logOutAction();
+      window.location.reload();
     } else {
-      window.location.href = '/login';
+      window.location.href = '/signin';
     }
-    // setTimeout is to give more loading feedback to user so actions aren't instantaneous
-    setTimeout(() => {
-      this.setState({
-        busy: false,
-      });
-    }, 500);
   };
 
   render() {
