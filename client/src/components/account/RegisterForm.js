@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Form, Button, Col } from 'react-bootstrap';
-import { signUserUp } from '../../actions/user';
+import { registerAction } from '../../actions';
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class RegisterForm extends Component {
     }
 
     e.preventDefault();
-    this.props.signUserUp(this.state);
+    this.props.registerAction(this.state);
     this.props.history.replace({
       pathname: '/',
     });
@@ -143,10 +143,10 @@ class RegisterForm extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+function mapStateToProps(state) {
   return {
-    signUserUp: (userInfo) => dispatch(signUserUp(userInfo)),
+    user: state.redux.user,
   };
-};
+}
 
-export default connect(null, mapDispatchToProps)(withRouter(RegisterForm));
+export default connect(mapStateToProps, { registerAction })(RegisterForm);

@@ -28,6 +28,7 @@ export async function getGenreListData() {
       list = resp.data.results;
     })
     .catch((error) => {
+      // eslint-disable-next-line
       console.error(error);
     });
   return list;
@@ -55,6 +56,7 @@ export async function getGameListData(
       list = resp.data.results;
     })
     .catch((error) => {
+      // eslint-disable-next-line
       console.error(error);
     });
   return list;
@@ -75,6 +77,7 @@ export async function getSingleGameData(id) {
       item = resp.data;
     })
     .catch((error) => {
+      // eslint-disable-next-line
       console.error(error);
     });
   return item;

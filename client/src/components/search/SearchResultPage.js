@@ -23,6 +23,7 @@ export default function SearchResultPage(props) {
       .then((res) => res.json())
       .then((json) => setData(json))
       .catch((error) => {
+        // eslint-disable-next-line
         console.log('Request failed', error);
       });
   }, [data]);

@@ -65,6 +65,17 @@ export default (state = DEFAULT_STATE, action) => {
       );
       return { ...state, shoppingCart: filteredShoppingCart };
     }
+    case types.SET_USER:
+      if (action.payload.success) {
+        localStorage.setItem(
+          'token',
+          JSON.stringify(action.payload.success.token)
+        );
+      }
+      return state;
+    case types.LOG_OUT:
+      localStorage.clear('token');
+      return state;
     default:
       return state;
   }

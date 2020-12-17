@@ -20,12 +20,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '..', 'client', 'public')));
 
-app.use((req, res, next) => {
-  res.sendFile(
-    path.resolve(__dirname, '..', 'client', 'client', 'public', 'index.html')
-  );
-});
-
 app.get('/', (req, res) => {
   res.json({ message: 'API Working' });
 });
@@ -39,8 +33,8 @@ app.get('/checkToken', auth, function (req, res) {
  * Router - /user/*
  * Method - *
  */
-app.use('/user', login);
-app.use('/user', signup);
+app.use('/api/user', login);
+app.use('/api/user', signup);
 
 app.listen(PORT, (req, res) => {
   console.log(`Server Started at PORT ${PORT}`);
