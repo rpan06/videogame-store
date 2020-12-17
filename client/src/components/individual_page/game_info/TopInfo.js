@@ -4,9 +4,9 @@ import SanitizedHTML from 'react-sanitized-html';
 
 /* eslint-disable */
 export default (props) => (
-  <div>
-    <Col>
-      <Row className="pb-4">
+  <>
+    <Col lg={10}>
+      <Row className="pb-4 d-flex">
         <Col>
           <h5>Developer</h5>
           <p>{(props.game.developers !== null) ? props.game.developers[0].name : 'n/a'}</p>
@@ -45,5 +45,5 @@ export default (props) => (
         </Col>
       </Row>
     </Col>
-  </div>
+  </>
 );
