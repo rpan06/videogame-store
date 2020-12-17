@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const login = require('./routes/login');
-const signup = require('./routes/signup');
+const signin = require('./routes/signin');
+const register = require('./routes/register');
 const auth = require('./middleware/auth');
 const InitiateMongoServer = require('./config/mongo_db');
 const path = require('path');
@@ -33,8 +33,8 @@ app.get('/checkToken', auth, function (req, res) {
  * Router - /user/*
  * Method - *
  */
-app.use('/api/user', login);
-app.use('/api/user', signup);
+app.use('/api/user', signin);
+app.use('/api/user', register);
 
 app.listen(PORT, (req, res) => {
   console.log(`Server Started at PORT ${PORT}`);

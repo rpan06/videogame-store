@@ -14,7 +14,7 @@ const User = require('../model/User');
  */
 
 router.post(
-  '/login',
+  '/signin',
   [
     check('email', 'Please enter a valid email').isEmail(),
     check('password', 'Please enter a valid password').isLength({
@@ -71,8 +71,8 @@ router.post(
         (err, token) => {
           if (err) throw err;
           res.status(200).json({
-              user,
-              token,
+            user,
+            token,
           });
         }
       );
@@ -99,7 +99,7 @@ router.get('/me', auth, async (req, res) => {
     const userObj = {
       user,
       token,
-    }
+    };
     res.json(userObj);
   } catch (e) {
     res.send({ message: 'Error in Fetching user' });

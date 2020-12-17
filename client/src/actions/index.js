@@ -4,7 +4,7 @@ import {
   getSingleGameData,
   getGenreListData,
 } from './rawg-api';
-import { createAccount, loginAccount } from './user';
+import { createAccount, signIn } from './user';
 
 export async function getGameListAction(
   queryCategory = null,
@@ -70,7 +70,7 @@ export function updateShoppingCartAction(payload) {
   };
 }
 
-export async function registerAction(payload) {
+export async function createAccountAction(payload) {
   const response = await createAccount(payload);
 
   return {
@@ -79,8 +79,8 @@ export async function registerAction(payload) {
   };
 }
 
-export async function logInAction(payload) {
-  const response = await loginAccount(payload);
+export async function signInAction(payload) {
+  const response = await signIn(payload);
   return {
     type: types.SET_USER,
     payload: response,
