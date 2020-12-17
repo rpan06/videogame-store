@@ -6,7 +6,7 @@ export async function createAccount(payload) {
     error: null,
   };
   await axios
-    .post('http://localhost:4000/api/user/signup/', payload)
+    .post('/api/user/register/', payload)
     .then((res) => {
       response.success = res.data;
     })
@@ -16,13 +16,13 @@ export async function createAccount(payload) {
   return response;
 }
 
-export async function loginAccount(payload) {
+export async function signIn(payload) {
   const response = {
     success: null,
     error: null,
   };
   await axios
-    .post('http://localhost:4000/api/user/login/', payload)
+    .post('/api/user/signin/', payload)
     .then((res) => {
       response.success = res.data;
     })
