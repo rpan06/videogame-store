@@ -41,9 +41,9 @@ export default function SearchResultPage(props) {
   }
 
   return (
-    <Container className="py-5">
+    <Container className="py-5 mt-5">
       <Row>
-        <Col className="pb-3 mb-4 gray-border">
+        <Col className="pb-3 mb-4 d-flex">
           <span className="search-header pl-2">Search Results For: </span>
           <span className="search-term pl-2">{searchTerm}</span>
         </Col>

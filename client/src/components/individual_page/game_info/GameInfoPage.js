@@ -12,10 +12,7 @@ export default (props) => {
     <Container className="pt-5 mt-3" id="game-info-container">
       <Overview game={props.game} />
       <Row>
-        <Col
-          lg={2}
-          className="about-game d-none d-lg-block font-weight-extra-light"
-        >
+        <Col className="about-game d-none d-lg-block font-weight-extra-light">
           ABOUT GAME
         </Col>
         <TopInfo game={props.game} />

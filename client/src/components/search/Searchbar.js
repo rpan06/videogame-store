@@ -26,6 +26,9 @@ class Searchbar extends Component {
       pathname: '/search',
       search: `?query=${this.state.value}`,
     });
+    this.setState({
+      value: '',
+    });
   };
 
   render() {
