@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import BannerImage from './banner_image';
@@ -14,13 +13,13 @@ export default class GameCarousel extends React.Component {
       <>
         <Carousel>
           <Carousel.Item>
-          <BannerImage gameId="3498" />
+            <BannerImage gameId="3498" />
           </Carousel.Item>
           <Carousel.Item>
-          <BannerImage gameId="3328" />
+            <BannerImage gameId="3328" />
           </Carousel.Item>
           <Carousel.Item>
-          <BannerImage gameId="58175" />
+            <BannerImage gameId="58175" />
           </Carousel.Item>
         </Carousel>
       </>
