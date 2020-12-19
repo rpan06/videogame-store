@@ -8,7 +8,11 @@ export default (props) => {
   const price = CalculatePrice(id);
 
   const truncate = (str) => {
-    return `${str.substring(0, 13)}...`;
+    if (str.length < 20) {
+      return str;
+    }
+
+    return `${str.substring(0, 20)}...`;
   };
 
   return (
@@ -16,10 +20,10 @@ export default (props) => {
       <div className="game-slide">
         <img src={backgroundImage} alt="" />
         <div className="game-info">
-          <div className="col-6 px-2">
+          <div className="col-10 px-2">
             <p className="game-title">{truncate(name)}</p>
           </div>
-          <div className="col-6 px-2">
+          <div className="col-2 px-2">
             <p className="game-price">${price}</p>
           </div>
         </div>

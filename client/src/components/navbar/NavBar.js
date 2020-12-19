@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { getGenreListData } from '../../actions/rawg-api';
-import { logOutAction } from '../../actions';
 import FetchCookie from '../../helper/fetchCookie';
+import { logOutAction, apiErrorAction } from '../../actions';
 import NavbarDropdown from './NavbarDropdown';
 import Searchbar from '../search/Searchbar';
 
@@ -87,13 +87,17 @@ class NavBar extends Component {
       });
     }
     const genreResponse = await getGenreListData();
-    this.setState({
-      genreList: genreResponse.map((res) => ({
-        id: res.id,
-        name: res.name,
-        slug: res.slug,
-      })),
-    });
+    if (genreResponse) {
+      this.setState({
+        genreList: genreResponse.map((res) => ({
+          id: res.id,
+          name: res.name,
+          slug: res.slug,
+        })),
+      });
+    } else {
+      this.props.apiErrorAction();
+    }
   }
 
   handleLoginLogout = () => {
@@ -170,4 +174,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { logOutAction })(NavBar);
+export default connect(mapStateToProps, { logOutAction, apiErrorAction })(
+  NavBar
+);

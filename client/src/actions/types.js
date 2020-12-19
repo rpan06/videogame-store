@@ -9,4 +9,5 @@ export default {
   UPDATE_SHOPPING_CART: 'update_shopping_cart',
   SET_USER: 'set_user',
   LOG_OUT: 'log_out',
+  API_ERROR: 'api_error',
 };

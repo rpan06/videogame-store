@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getSingleGameData } from '../../../actions/rawg-api';
+import { apiErrorAction } from '../../../actions';
 import ShortenSummary from '../../../helper/shortenSummary';
 import LoadingSpinner from '../../shared/loading_spinner';
 import '../../../scss/landing_page/carousel_banner/banner_image.scss';
 
-export default class BannerImage extends Component {
+class BannerImage extends Component {
   constructor(props) {
     super(props);
 
@@ -15,9 +17,14 @@ export default class BannerImage extends Component {
   }
 
   async componentDidMount() {
-    this.setState({
-      game: await getSingleGameData(this.props.gameId),
-    });
+    const response = await getSingleGameData(this.props.gameId);
+    if (response) {
+      this.setState({
+        game: response,
+      });
+    } else {
+      this.props.apiErrorAction();
+    }
   }
 
   render() {
@@ -67,3 +74,11 @@ export default class BannerImage extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    redux: state.redux,
+  };
+}
+
+export default connect(mapStateToProps, { apiErrorAction })(BannerImage);

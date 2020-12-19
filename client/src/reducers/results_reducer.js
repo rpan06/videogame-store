@@ -26,6 +26,7 @@ const DEFAULT_STATE = {
   list: [],
   single: {},
   shoppingCart: checkLocalStorage(),
+  apiError: false,
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -75,6 +76,8 @@ export default (state = DEFAULT_STATE, action) => {
     case types.LOG_OUT:
       document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
       return state;
+    case types.API_ERROR:
+      return { ...state, apiError: true };
     default:
       return state;
   }

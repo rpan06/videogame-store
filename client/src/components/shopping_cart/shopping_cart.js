@@ -47,7 +47,7 @@ class ShoppingCart extends Component {
     total = total.toFixed(2);
 
     return (
-      <div className="container py-5 d-flex flex-column align-items-center">
+      <div className="container py-5 mt-5 d-flex flex-column align-items-center">
         <div
           className={`overlay ${this.state.showOverlay ? 'visible' : ''}`}
           onClick={this.toggleOverlay}

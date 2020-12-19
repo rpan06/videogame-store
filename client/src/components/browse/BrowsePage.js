@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import { getGameListData, getGenreListData } from '../../actions/rawg-api';
-import { clearGameListAction } from '../../actions/index';
+import { clearGameListAction, apiErrorAction } from '../../actions/index';
 import CategoryList from './CategoryList';
 import GameItem from '../landing_page/game_list/game_item';
 import LoadingSpinner from '../shared/loading_spinner';
@@ -20,18 +20,23 @@ class BrowsePage extends Component {
 
   async componentDidMount() {
     const genreResponse = await getGenreListData();
-    this.setState({
-      genreList: genreResponse.map((res) => ({
-        id: res.id,
-        name: res.name,
-        slug: res.slug,
-      })),
-      gameList: await getGameListData(
-        'genres',
-        this.props.match.params.category,
-        'rating'
-      ),
-    });
+    const gameResponse = await getGameListData(
+      'genres',
+      this.props.match.params.category,
+      'rating'
+    );
+    if (genreResponse && gameResponse) {
+      this.setState({
+        genreList: genreResponse.map((res) => ({
+          id: res.id,
+          name: res.name,
+          slug: res.slug,
+        })),
+        gameList: gameResponse,
+      });
+    } else {
+      this.props.apiErrorAction();
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -39,7 +44,7 @@ class BrowsePage extends Component {
       getGameListData(
         'genres',
         this.props.match.params.category,
-        'rating'
+        'metacritic'
       ).then((result) =>
         this.setState({
           gameList: result,
@@ -104,4 +109,5 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   clearGameListAction,
+  apiErrorAction,
 })(BrowsePage);
