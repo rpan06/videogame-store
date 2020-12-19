@@ -11,6 +11,7 @@ export default class SignIn extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     // Redirects user to homepage if logged in.
     if (FetchCookie('token')) {
       window.location.href = '/';

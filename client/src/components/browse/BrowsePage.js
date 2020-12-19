@@ -19,6 +19,7 @@ class BrowsePage extends Component {
   }
 
   async componentDidMount() {
+    window.scrollTo(0, 0);
     const genreResponse = await getGenreListData();
     const gameResponse = await getGameListData(
       'genres',

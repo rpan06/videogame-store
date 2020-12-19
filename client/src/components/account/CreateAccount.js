@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import CreateAccountForm from './CreateAccountForm';
+import FetchCookie from '../../helper/fetchCookie';
 import '../../scss/account/account.scss';
 
 export default class CreateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    // Redirects user to homepage if logged in.
+    if (FetchCookie('token')) {
+      window.location.href = '/';
+    }
   }
 
   render() {
