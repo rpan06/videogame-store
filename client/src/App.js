@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
 import LandingPage from './components/landing_page/landing_page';
 import IndividualPage from './components/individual_page/individual_page';
 import NotFound from './components/404';
@@ -16,19 +17,21 @@ import './scss/custom.scss';
 
 const App = () => (
   <Router>
-    <NavBar />
-    <Switch>
-      <Route exact path="/" component={LandingPage} />
-      <Route path="/game/:id" component={IndividualPage} />
-      <Route path="/browse/:category" component={BrowsePage} />
-      <Route path="/search" component={SearchResultPage} />
-      <Route path="/cart" component={ShoppingCart} />
-      <Route path="/register" component={CreateAccount} />
-      <Route path="/signin" component={SignIn} />
-      <Route component={NotFound} />
-    </Switch>
-    <ResponsiveFooter />
-    <ErrorScreen />
+    <ScrollToTop>
+      <NavBar />
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route path="/game/:id" component={IndividualPage} />
+        <Route path="/browse/:category" component={BrowsePage} />
+        <Route path="/search" component={SearchResultPage} />
+        <Route path="/cart" component={ShoppingCart} />
+        <Route path="/register" component={CreateAccount} />
+        <Route path="/signin" component={SignIn} />
+        <Route component={NotFound} />
+      </Switch>
+      <ResponsiveFooter />
+      <ErrorScreen />
+    </ScrollToTop>
   </Router>
 );
 
