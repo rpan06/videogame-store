@@ -26,16 +26,47 @@ export default class LandingPage extends Component {
 
   render() {
     return (
-      <div className="container py-5 mt-5">
-        <GameCarousel />
-        <GameList queryCategory={null} queryItem={null} headerText="Popular" />
-        <Ads game={this.state.adsList[0]} buttonText="BUY NOW" />
-        <GameList
-          queryCategory="genres"
-          queryItem="adventure"
-          headerText="adventure"
-        />
-        <Ads game={this.state.adsList[1]} buttonText="Learn More" />
+      <div id="landing">
+        <div className="container py-5 mt-5">
+          <GameCarousel />
+          <GameList
+            queryCategory={null}
+            queryItem={null}
+            headerText="Popular"
+          />
+          <Ads game={this.state.adsList[0]} buttonText="BUY NOW" />
+          <GameList
+            queryCategory="tags"
+            queryItem="multiplayer"
+            querySort="metacritic"
+            headerText="Multiplayer"
+          />
+          <GameList
+            queryCategory="genres"
+            queryItem="sports"
+            headerText="Sports"
+          />
+          <Ads game={this.state.adsList[1]} buttonText="LEARN MORE" />
+          <GameList
+            queryCategory="genres"
+            queryItem="adventure"
+            headerText="Adventure"
+          />
+          <Ads game={this.state.adsList[3]} buttonText="BUY NOW" />
+          <GameList
+            queryCategory="developers"
+            queryItem="valve-software"
+            querySort="metacritic"
+            headerText="Discover Valve"
+          />
+          <GameList
+            queryCategory="genres"
+            queryItem="arcade"
+            querySort="metacritic"
+            headerText="Arcade"
+          />
+          <Ads game={this.state.adsList[4]} buttonText="FACE YOUR FEARS" />
+        </div>
       </div>
     );
   }

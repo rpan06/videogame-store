@@ -38,7 +38,7 @@ class GameList extends Component {
       <GameItem game={game} key={game.id} />
     ));
     return (
-      <div className="py-5">
+      <div className="py-5 my-4">
         <h4 className="font-weight-light text-uppercase pl-2">
           {this.props.headerText}
         </h4>

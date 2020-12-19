@@ -44,7 +44,7 @@ class BrowsePage extends Component {
       getGameListData(
         'genres',
         this.props.match.params.category,
-        'rating'
+        'metacritic'
       ).then((result) =>
         this.setState({
           gameList: result,
