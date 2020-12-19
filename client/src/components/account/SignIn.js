@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
 import SignInForm from './SignInForm';
+import FetchCookie from '../../helper/fetchCookie';
 import '../../scss/account/account.scss';
 
 export default class SignIn extends Component {
@@ -11,7 +12,7 @@ export default class SignIn extends Component {
 
   componentDidMount() {
     // Redirects user to homepage if logged in.
-    if (localStorage.getItem('token')) {
+    if (FetchCookie('token')) {
       window.location.href = '/';
     }
   }
