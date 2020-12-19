@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { getGameListData, getGenreListData } from '../../actions/rawg-api';
 import { clearGameListAction, apiErrorAction } from '../../actions/index';
 import CategoryList from './CategoryList';
+import MobileCategoryList from './MobileCategoryList';
 import GameItem from '../landing_page/game_list/game_item';
 import LoadingSpinner from '../shared/loading_spinner';
 import '../../scss/browse/browse.scss';
@@ -70,6 +71,9 @@ class BrowsePage extends Component {
     return (
       <Container className="w-100 py-5 mt-5" id="browse-container">
         <Row>
+          <Col xs={12} className="d-lg-none d-xl-none mobile-category-list">
+            <MobileCategoryList genreList={this.state.genreList} />
+          </Col>
           <Col xs={{ order: 2 }} lg={{ span: 10, order: 1 }}>
             <div className="pb-2">
               <p>
@@ -89,11 +93,7 @@ class BrowsePage extends Component {
               {galleryData}
             </div>
           </Col>
-          <Col
-            xs={{ span: 12, order: 1 }}
-            lg={{ span: 2, order: 2 }}
-            className="d-none d-lg-block"
-          >
+          <Col lg={{ span: 2, order: 2 }} className="d-none d-lg-block">
             <CategoryList genreList={this.state.genreList} />
           </Col>
         </Row>

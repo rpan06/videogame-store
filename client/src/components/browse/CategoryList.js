@@ -16,7 +16,9 @@ export default function CategoryList(props) {
       <div className="bottom-border pb-2">
         <p>Filters</p>
       </div>
-      <div className="mt-3 d-flex flex-column pb-5">{categoryItems}</div>
+      <div className="mt-3 d-flex flex-column pb-5" id="category-list">
+        {categoryItems}
+      </div>
     </>
   );
 }
