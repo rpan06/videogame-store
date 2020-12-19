@@ -10,6 +10,7 @@ import SearchResultPage from './components/search/SearchResultPage';
 import ShoppingCart from './components/shopping_cart/shopping_cart';
 import CreateAccount from './components/account/CreateAccount';
 import SignIn from './components/account/SignIn';
+import ErrorScreen from './components/shared/error_screen';
 import './App.css';
 import './scss/custom.scss';
 
@@ -27,6 +28,7 @@ const App = () => (
       <Route component={NotFound} />
     </Switch>
     <ResponsiveFooter />
+    <ErrorScreen />
   </Router>
 );
 
