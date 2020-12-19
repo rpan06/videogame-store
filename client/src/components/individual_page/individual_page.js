@@ -13,6 +13,7 @@ import {
 
 class IndividualPage extends Component {
   async componentDidMount() {
+    window.scrollTo(0, 0);
     const response = await this.props.getSingleGameAction(
       this.props.match.params.id
     );

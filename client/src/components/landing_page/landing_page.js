@@ -14,6 +14,7 @@ export default class LandingPage extends Component {
   }
 
   async componentDidMount() {
+    window.scrollTo(0, 0);
     const response = await getGameListData('genres', 'indie');
     if (response) {
       this.setState({
