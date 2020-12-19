@@ -67,14 +67,13 @@ export default (state = DEFAULT_STATE, action) => {
     }
     case types.SET_USER:
       if (action.payload.success) {
-        localStorage.setItem(
-          'token',
-          JSON.stringify(action.payload.success.token)
-        );
+        let expireDate = new Date();
+        expireDate = expireDate.setDate(expireDate.getDate() + 3);
+        document.cookie = `token=${action.payload.success.token}; expires=${expireDate}`;
       }
       return state;
     case types.LOG_OUT:
-      localStorage.clear('token');
+      document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
       return state;
     default:
       return state;

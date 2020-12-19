@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
 import { getGenreListData } from '../../actions/rawg-api';
 import { logOutAction } from '../../actions';
+import FetchCookie from '../../helper/fetchCookie';
 import NavbarDropdown from './NavbarDropdown';
 import Searchbar from '../search/Searchbar';
 
@@ -80,7 +81,7 @@ class NavBar extends Component {
   }
 
   async componentDidMount() {
-    if (localStorage.getItem('token')) {
+    if (FetchCookie('token')) {
       this.setState({
         isLoggedIn: true,
       });
@@ -140,21 +141,22 @@ class NavBar extends Component {
               </Nav.Link>
             </Nav>
             <Searchbar />
-            {this.state.busy ? (
-              <Button disabled id="login-logout-btn" variant="outline-warning">
+
+            <Button
+              id="login-logout-btn"
+              variant="outline-warning"
+              onClick={this.handleLoginLogout}
+            >
+              {this.state.busy ? (
                 <div className="spinner-border spinner-border-sm" role="status">
                   <span className="sr-only">Loading...</span>
                 </div>
-              </Button>
-            ) : (
-              <Button
-                id="login-logout-btn"
-                variant="outline-warning"
-                onClick={this.handleLoginLogout}
-              >
-                {this.state.isLoggedIn ? 'Logout' : 'Login'}
-              </Button>
-            )}
+              ) : this.state.isLoggedIn ? (
+                'Logout'
+              ) : (
+                'Login'
+              )}
+            </Button>
           </Navbar.Collapse>
         </Navbar>
       </>
