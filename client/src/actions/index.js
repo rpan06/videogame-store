@@ -92,3 +92,9 @@ export async function logOutAction() {
     type: types.LOG_OUT,
   };
 }
+
+export async function apiErrorAction() {
+  return {
+    type: types.API_ERROR,
+  };
+}
