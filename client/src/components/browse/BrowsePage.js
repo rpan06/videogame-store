@@ -71,11 +71,11 @@ class BrowsePage extends Component {
     return (
       <Container className="w-100 py-5 mt-5" id="browse-container">
         <Row>
-          <Col xs={12} className="d-lg-none d-xl-none mobile-category-list">
+          <Col xs={12} className="d-lg-none d-xl-none">
             <MobileCategoryList genreList={this.state.genreList} />
           </Col>
           <Col xs={{ order: 2 }} lg={{ span: 10, order: 1 }}>
-            <div className="pb-2">
+            <div className="pb-2 browsing-div">
               <p>
                 {`Browsing `}
                 <span className="browsing-title">

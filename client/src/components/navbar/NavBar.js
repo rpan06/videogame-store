@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav, Button } from 'react-bootstrap';
-import { getGenreListData } from '../../actions/rawg-api';
 import FetchCookie from '../../helper/fetchCookie';
 import { logOutAction, apiErrorAction } from '../../actions';
-import NavbarDropdown from './NavbarDropdown';
 import Searchbar from '../search/Searchbar';
 
 import logo from '../../assets/logo.svg';
@@ -16,9 +14,9 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      genreList: [],
       isLoggedIn: false,
       busy: false,
+      expanded: false,
     };
 
     this.accountIcon = (
@@ -86,18 +84,6 @@ class NavBar extends Component {
         isLoggedIn: true,
       });
     }
-    const genreResponse = await getGenreListData();
-    if (genreResponse) {
-      this.setState({
-        genreList: genreResponse.map((res) => ({
-          id: res.id,
-          name: res.name,
-          slug: res.slug,
-        })),
-      });
-    } else {
-      this.props.apiErrorAction();
-    }
   }
 
   handleLoginLogout = () => {
@@ -121,8 +107,13 @@ class NavBar extends Component {
           variant="dark"
           className="navbar-scss"
           fixed="top"
+          expanded={this.state.expanded}
         >
-          <Navbar.Brand as={Link} to="/">
+          <Navbar.Brand
+            as={Link}
+            to="/"
+            onClick={() => this.setState({ expanded: false })}
+          >
             <img src={logo} alt="logo" id="store-logo" />
           </Navbar.Brand>
           <Navbar.Brand
@@ -133,14 +124,44 @@ class NavBar extends Component {
           >
             Game Nation
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Toggle
+            aria-controls="responsive-navbar-nav"
+            onClick={() => {
+              if (this.state.expanded) {
+                this.setState({
+                  expanded: false,
+                });
+              } else {
+                this.setState({
+                  expanded: 'expanded',
+                });
+              }
+            }}
+          />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link as={Link} to="/" className="mx-1">
+              <Nav.Link
+                as={Link}
+                to="/"
+                className="mx-1"
+                onClick={() => this.setState({ expanded: false })}
+              >
                 Store
               </Nav.Link>
-              <NavbarDropdown genreList={this.state.genreList} />
-              <Nav.Link as={Link} to="/cart" className="mx-1">
+              <Nav.Link
+                as={Link}
+                to="/browse/action"
+                className="mx-1"
+                onClick={() => this.setState({ expanded: false })}
+              >
+                Browse
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/cart"
+                className="mx-1"
+                onClick={() => this.setState({ expanded: false })}
+              >
                 Cart
               </Nav.Link>
             </Nav>
