@@ -19,11 +19,14 @@ export default function DesktopFooter() {
       <footer className="footer mt-auto py-3">
         <Container>
           <Row className="py-5">
-            <Col lg xs={{ span: 12 }}>
+            <Col lg={3}>
               <img src={logo} alt="store logo" className="mb-3" />
               <p>GAME NATION</p>
+              <p className="primary-light">
+                Making it easier than ever to get access to the games you love.
+              </p>
             </Col>
-            <Col lg xs={{ span: 12 }}>
+            <Col lg={{ span: 2, offset: 1 }}>
               <p className="footer-title">Support</p>
               <Link to="/" className="footer-link">
                 <p>Contact Us</p>
@@ -38,7 +41,7 @@ export default function DesktopFooter() {
                 Accessibility
               </Link>
             </Col>
-            <Col lg xs={{ span: 12 }}>
+            <Col lg={2}>
               <p className="footer-title">About</p>
               <Link to="/" className="footer-link">
                 <p>Our Story</p>
@@ -53,7 +56,7 @@ export default function DesktopFooter() {
                 Careers
               </Link>
             </Col>
-            <Col lg xs={{ span: 12 }}>
+            <Col lg={2}>
               <p className="footer-title">Follow Us</p>
               <Link to="/" className="footer-link">
                 <p>
@@ -74,17 +77,17 @@ export default function DesktopFooter() {
                 </p>
               </Link>
             </Col>
-            <Col lg={{ order: 'last' }} xs={{ span: 12, order: 'first' }}>
+            <Col lg={2} className="d-flex justify-content-end">
               <button type="button" onClick={scrollTop}>
                 <img src={upchevron} alt="up chevron" />
               </button>
             </Col>
           </Row>
           <Row className="py-5">
-            <Col lg xs={{ span: 12 }} className="copyright">
+            <Col lg className="copyright">
               Copyright © 2020. Game Nation. All rights reserved.
             </Col>
-            <Col lg xs={{ span: 12 }}>
+            <Col lg className="text-right">
               <Link to="/" className="footer-link">
                 <span className="pr-5">Terms and Conditions</span>
               </Link>

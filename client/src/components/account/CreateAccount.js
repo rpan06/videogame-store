@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { Container, Col, Row } from 'react-bootstrap';
-import RegisterForm from './RegisterForm';
+import CreateAccountForm from './CreateAccountForm';
+import FetchCookie from '../../helper/fetchCookie';
 import '../../scss/account/account.scss';
 
 export default class CreateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    // Redirects user to homepage if logged in.
+    if (FetchCookie('token')) {
+      window.location.href = '/';
+    }
   }
 
   render() {
@@ -16,7 +25,7 @@ export default class CreateAccount extends Component {
           <Row>
             <Col className="account-box p-5" lg={{ span: 8, offset: 2 }}>
               <h5 className="text-uppercase text-center py-3">SIGN UP</h5>
-              <RegisterForm />
+              <CreateAccountForm />
             </Col>
           </Row>
         </Container>

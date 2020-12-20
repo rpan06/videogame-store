@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getSingleGameData } from '../../../actions/rawg-api';
+import { apiErrorAction } from '../../../actions';
 import ShortenSummary from '../../../helper/shortenSummary';
 import LoadingSpinner from '../../shared/loading_spinner';
 import '../../../scss/landing_page/carousel_banner/banner_image.scss';
 
-export default class BannerImage extends Component {
+class BannerImage extends Component {
   constructor(props) {
     super(props);
 
@@ -15,9 +17,14 @@ export default class BannerImage extends Component {
   }
 
   async componentDidMount() {
-    this.setState({
-      game: await getSingleGameData(this.props.gameId),
-    });
+    const response = await getSingleGameData(this.props.gameId);
+    if (response) {
+      this.setState({
+        game: response,
+      });
+    } else {
+      this.props.apiErrorAction();
+    }
   }
 
   render() {
@@ -40,10 +47,12 @@ export default class BannerImage extends Component {
           alt=""
         />
         <div className="banner-info col-12 col-lg-5 p-5">
-          <h1 className="font-weight-extra-light pb-3">{name}</h1>
-          <span className="w-100 text-secondary pb-2">{summary}</span>
+          <h1 className="font-weight-extra-light pb-3 game-name">{name}</h1>
+          <span className="w-100 text-secondary pb-2 game-summary">
+            {summary}
+          </span>
           <Link to={`/game/${id}`}>
-            <h5 className="font-weight-light color-yellow">
+            <h5 className="font-weight-light color-yellow pt-3 buy-now">
               BUY NOW{' '}
               <svg
                 width="1em"
@@ -65,3 +74,11 @@ export default class BannerImage extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    redux: state.redux,
+  };
+}
+
+export default connect(mapStateToProps, { apiErrorAction })(BannerImage);

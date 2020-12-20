@@ -5,11 +5,21 @@ import IndividualPageBanner from './individual_page_banner';
 import GameInfoPage from './game_info/GameInfoPage';
 import FollowUs from './follow_us';
 import Reviews from './reviews';
-import { getSingleGameAction, clearSingleItemAction } from '../../actions';
+import {
+  getSingleGameAction,
+  clearSingleItemAction,
+  apiErrorAction,
+} from '../../actions';
 
 class IndividualPage extends Component {
   async componentDidMount() {
-    await this.props.getSingleGameAction(this.props.match.params.id);
+    window.scrollTo(0, 0);
+    const response = await this.props.getSingleGameAction(
+      this.props.match.params.id
+    );
+    if (!response.payload) {
+      this.props.apiErrorAction();
+    }
   }
 
   componentWillUnmount() {
@@ -36,11 +46,12 @@ class IndividualPage extends Component {
 
 function mapStateToProps(state) {
   return {
-    item: state.list.single,
+    item: state.redux.single,
   };
 }
 
 export default connect(mapStateToProps, {
   getSingleGameAction,
   clearSingleItemAction,
+  apiErrorAction,
 })(IndividualPage);

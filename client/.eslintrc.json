@@ -24,6 +24,10 @@
     "import/no-unresolved": 0,
     "no-plusplus": 0,
     "no-param-reassign": 0,
+    "import/no-extraneous-dependencies": 0,
+    "react/no-unescaped-entities": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "no-nested-ternary": 0,
     "react/jsx-filename-extension": [
       1,
       {

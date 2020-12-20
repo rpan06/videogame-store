@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
+import { apiErrorAction } from '../../actions';
 import GameItem from '../landing_page/game_list/game_item';
 import LoadingSpinner from '../shared/loading_spinner';
 import config from '../../config';
 import '../../scss/search/search.scss';
 
-export default function SearchResultPage(props) {
+function SearchResultPage(props) {
   const searchTerm = props.location.search.replace('?query=', '');
   const [data, setData] = useState([]);
 
@@ -23,7 +25,9 @@ export default function SearchResultPage(props) {
       .then((res) => res.json())
       .then((json) => setData(json))
       .catch((error) => {
+        // eslint-disable-next-line
         console.log('Request failed', error);
+        props.apiErrorAction();
       });
   }, [data]);
 
@@ -40,9 +44,9 @@ export default function SearchResultPage(props) {
   }
 
   return (
-    <Container className="py-5">
+    <Container className="py-5 mt-5">
       <Row>
-        <Col className="pb-3 mb-4 gray-border">
+        <Col className="pb-3 mb-4 d-flex">
           <span className="search-header pl-2">Search Results For: </span>
           <span className="search-term pl-2">{searchTerm}</span>
         </Col>
@@ -53,3 +57,11 @@ export default function SearchResultPage(props) {
     </Container>
   );
 }
+
+function mapStateToProps(state) {
+  return {
+    redux: state.redux,
+  };
+}
+
+export default connect(mapStateToProps, { apiErrorAction })(SearchResultPage);

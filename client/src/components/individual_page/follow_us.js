@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../scss/individual_page/individual_page.scss';
-
 import redditImage from '../../assets/reddit.svg';
 import globeImage from '../../assets/globe.svg';
 

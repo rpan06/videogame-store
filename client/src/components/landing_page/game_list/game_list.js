@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { getGameListData } from '../../../actions/rawg-api';
+import { apiErrorAction } from '../../../actions';
 import GameItem from './game_item';
 import LoadingSpinner from '../../shared/loading_spinner';
 import '../../../scss/landing_page/game_list/game_list.scss';
 
-export default class GameList extends Component {
+class GameList extends Component {
   constructor(props) {
     super(props);
 
@@ -14,12 +16,17 @@ export default class GameList extends Component {
   }
 
   async componentDidMount() {
-    this.setState({
-      list: await getGameListData(
-        this.props.queryCategory,
-        this.props.queryItem
-      ),
-    });
+    const response = await getGameListData(
+      this.props.queryCategory,
+      this.props.queryItem
+    );
+    if (response) {
+      this.setState({
+        list: response,
+      });
+    } else {
+      this.props.apiErrorAction();
+    }
   }
 
   render() {
@@ -31,7 +38,7 @@ export default class GameList extends Component {
       <GameItem game={game} key={game.id} />
     ));
     return (
-      <div className="py-5">
+      <div className="py-5 my-4">
         <h4 className="font-weight-light text-uppercase pl-2">
           {this.props.headerText}
         </h4>
@@ -42,3 +49,11 @@ export default class GameList extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    redux: state.redux,
+  };
+}
+
+export default connect(mapStateToProps, { apiErrorAction })(GameList);

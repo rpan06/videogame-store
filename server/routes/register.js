@@ -12,7 +12,7 @@ const User = require('../model/User');
  */
 
 router.post(
-  '/signup',
+  '/register',
   [
     check('firstName', 'Please enter a first name.').not().isEmpty(),
     check('lastName', 'Please enter a last name.').not().isEmpty(),
@@ -25,7 +25,7 @@ router.post(
         } else {
           return value;
         }
-      })
+      }),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -42,7 +42,12 @@ router.post(
       });
       if (user) {
         return res.status(400).json({
-          msg: 'User Already Exists',
+          errors: [
+            {
+              param: 'email',
+              msg: 'This email is already in use.',
+            },
+          ],
         });
       }
 
@@ -56,8 +61,8 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
 
-      await user.save(function(err, doc) {
-        if(err) {
+      await user.save(function (err, doc) {
+        if (err) {
           return console.error(err);
         }
       });

@@ -14,7 +14,7 @@ export default (props) => {
     metacritic,
   } = props.game;
   return (
-    <div className="position-relative">
+    <div className="position-relative my-4">
       <img className="ad-image" src={backgroundImage} alt={name} />
       <div className="gradient-black-overlay" />
       <div className="ad-text">

@@ -26,6 +26,7 @@ const DEFAULT_STATE = {
   list: [],
   single: {},
   shoppingCart: checkLocalStorage(),
+  apiError: false,
 };
 
 export default (state = DEFAULT_STATE, action) => {
@@ -65,6 +66,18 @@ export default (state = DEFAULT_STATE, action) => {
       );
       return { ...state, shoppingCart: filteredShoppingCart };
     }
+    case types.SET_USER:
+      if (action.payload.success) {
+        let expireDate = new Date();
+        expireDate = expireDate.setDate(expireDate.getDate() + 3);
+        document.cookie = `token=${action.payload.success.token}; expires=${expireDate}`;
+      }
+      return state;
+    case types.LOG_OUT:
+      document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+      return state;
+    case types.API_ERROR:
+      return { ...state, apiError: true };
     default:
       return state;
   }
