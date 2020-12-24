@@ -1,6 +1,6 @@
 # Game Nation
 
-> A fake e-commerce site that allows users to browse the list of video games and add them to a shopping cart. It also features account creation and user log-in.
+A fake e-commerce site that allows users to browse the list of video games and add them to a shopping cart. It also features account creation and user log-in.
 
 ## Installation
 
@@ -25,7 +25,7 @@
 >    - `npm run server`
 > 1. Open a browser and navigate to `localhost:3000`
 
-## Author
+## Authors
 
 Rachel Pan - rpan06@gmail.com\
 Michelle Poole - michelle.poole.email@gmail.com
