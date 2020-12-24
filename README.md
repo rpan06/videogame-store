@@ -27,5 +27,5 @@
 
 ## Author
 
-Rachel Pan - rpan06@gmail.com. 
+Rachel Pan - rpan06@gmail.com\
 Michelle Poole - michelle.poole.email@gmail.com
